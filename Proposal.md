@@ -46,7 +46,3 @@ We will be styling the website, checking for bugs, and debugging.
 Andy - Styling
 Sean - Styling
 Charles - Styling
-
-
-
-
