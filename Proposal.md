@@ -34,18 +34,18 @@ Charles - detail page for each item
 
 we will implement the cart where users can add items and keep browsing until they are ready to pay. When the user is ready to pay they will be sent to the transaction page where they will be shown all of their items and prices and reviews. The user will get an email of their receipt once a purchase has been made.
 
-Andy - Transactiong Page  <br>
-Sean - Email  <br>
-Charles - Shopping cart   <br>
+Andy - Transactiong Page  
+Sean - Email  
+Charles - Shopping cart   
 
 
 #### Week 4
 
 We will be styling the website, checking for bugs, and debugging.
 
-Andy - Styling  <br>
-Sean - Styling  <br>
-Charles - Styling  <br>
+Andy - Styling  
+Sean - Styling  
+Charles - Styling  
 
 
 
