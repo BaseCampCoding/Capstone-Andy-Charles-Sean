@@ -1,12 +1,13 @@
 ## Shelf Wear
 
 ### Description and Motivation
-We wanted to create a platform where the user has easy access for clothes shopping. The first page will be the homepage and will have the sign up and login button in the navbar. The navbar will have categories to clothes like tops, pants and shoes. 
+We wanted to create a platform where the user has easy access for cloths shopping. The first page will be the homepage and will have the sign up and login button in the navbar. When the user is logged in, the navbar will have categories to clothes like tops, pants and shoes. Contents will be in the body with a short description and when clicked, user will be redirected into a detail page of the product. The detail page will a description and reviews of the product. User can then add item into a cart and will only be able to check out if the user is signed in. We wanted to give the user a experience like buying cloths online from Amazon, Old Navy, Zumiez and American Eagle.
 
 ### Prior Art
 Prior arts to this project would be websites such as, Amazon, American Eagle, H&M, and etc. The design will be made based on what we feel like is the best design for UI/UX. 
 
 ### Core User Workflows
+The User is able to browse through the clothes on the website by using the navbar that has different categories of clothes such as tops, pants, and shoes. Each item when you click on it will be a detail page of the specific item.  Once, the user tries to make a purchase, The user will need to make an account or log into an existing account. When the user is logged in or has made an account they are able to able as many thing clothing items into their cart. When it is time to checkout the site will redirect the user to a checkout page that will ask the user for basic information such as name, email, address, and credit card information. When all the information is filled in. The user can complete the order and the program will send the user an email with a summary of what the user has purchased.
 
 ### How will you utilize the content covered this unit
 
