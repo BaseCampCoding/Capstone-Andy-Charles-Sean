@@ -14,22 +14,39 @@ The User is able to browse through the clothes on the website by using the navba
 
 Week 1
 
-The functionality we will add a landing/home page with the list of all the clothes, categories for the clothes, a navbar, admin access, cards for the clothes, with sign in/sign up buttons, styling css, bootstrap, add the buttons for the other pages, buyer and seller roles to either buy clothes or post clothes to sell,
+The functionality we will add a landing/home page with the list of all the clothes, categories for the clothes, a navbar, admin access, cards for the clothes, with sign in/sign up buttons, styling css, bootstrap, add the buttons for the other pages.
 
-Andy - navbar, styling, 
+Andy - navbar, styling, adding  categories for clothes
 Sean - user auth, roles for users, registration buttons, forms, styling
-Charles - cards for the clothes, 
+Charles - cards for the clothes, admin access
 
 
-Monday - 7/12/21
-We would like to get our project started up, make sure VS Code is working for everyone, talk through the project one more time, after we finish the proposal, we will get started on getting our Django enviroment setup.
 
-Tuesday - 7/13/21
-Andy will work on the navbar, styling it as he goes, then he will work on adding categories and redirecting them, Sean will work on user authentication, help with the redirecting, Charles will work on adding a button for the admins to add new clothng items, and implementing cards on the landing page.
+Week 2
 
-Wednesday - 7/14/21
-Andy will work on the individual detail pages for the clothes, Sean will work on adding in an admin, and work with SendGrid to send enails, Charles will work on adding the shopping cart, and transaction page 
+We will be working on the detail page for each clothing item with a short description of the item, price, and review. We are going to put in a buyer role and seller role to either buy clothes or post clothes to sell. We will also let the user be redirected to the different categories of clothes thats on the navbar.
 
-Thursday - 7/15/21
-Andy will work on  , Sean will work on  , Charles will work on  , 
+Andy - redirecting to different pages
+Sean - buyer role and seller role
+Charles - detail page for each item
+
+Week 3
+
+we will implement the cart where users can add items and keep browsing until they are ready to pay. When the user is ready to pay they will be sent to the transaction page where they will be shown all of their items and prices and reviews. The user will get an email of their receipt once a purchase has been made.
+
+Andy - Transactiong Page
+Sean - Email
+Charles - Shopping cart 
+
+
+Week 4
+
+We will be styling the website, checking for bugs, and debugging.
+
+Andy - Styling
+Sean - Styling
+Charles - Styling
+
+
+
 
