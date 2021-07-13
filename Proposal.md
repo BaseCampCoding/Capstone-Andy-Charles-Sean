@@ -1,7 +1,7 @@
 ## Shelf Wear
 
 ### Description and Motivation
-We want create a platform where the user has easy access for clothes shopping. We also want to give the the user a good experience like buying clothes online from Amazon, Old Navy, Zumiez and American Eagle. Our motivation is to make online shopping as easy as possible just by browsing for what you need through filter and adding coupons to your transactions so no one has to pay as much.
+We want create a platform where the user has easy access for clothes shopping. We also want to give the the user a good experience like buying clothes online from Amazon, Old Navy, Zumiez and American Eagle. Our motivation is to make online shopping as easy as possible just by browsing for what you need through filter and adding coupons to your transactions so no one has to pay as much for the things you like.
 
 ### Prior Art
 Prior arts to this project would be websites such as, Amazon, American Eagle, H&M, and etc. The design will be made based on what we feel like is the best design for UI/UX.
