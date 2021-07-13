@@ -8,14 +8,13 @@ class UserAdmin(UserAdmin):
     form = UserChangeForm
     model = CustomUser
     list_display = [
-        'username', 'first_name', 'last_name', 'email', 
-        'genre', 'roles', 'about', 'profile_picture', 'is_staff',
+        'username', 'first_name', 'last_name', 'email', 'roles', 'is_staff',
     ]
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('genre', 'roles', 'about', 'profile_picture', 'followers', )}),
+        (None, {'fields': ('roles',)}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        (None, {'fields': ('genre', 'roles', 'about', 'profile_picture',)}),
+        (None, {'fields': ('roles',)}),
     )
 
 admin.site.register(CustomUser, UserAdmin)
