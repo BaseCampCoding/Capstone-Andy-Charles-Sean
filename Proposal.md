@@ -1,14 +1,17 @@
 ## Shelf Wear
 
 ### Description and Motivation
-We wanted to create a platform where the user has easy access for clothes shopping. The first page will be the homepage and will have the sign up and login button in the navbar. When the user is logged in, the navbar will have categories to clothes like tops, pants and shoes. Contents will be in the body with a short description and when clicked, user will be redirected into a detail page of the product. The detail page will a description and reviews of the product. User can then add item into a cart and will only be able to check out if the user is signed in. We wanted to give the user a experience like buying clothes online from Amazon, Old Navy, Zumiez and American Eagle.
+We want create a platform where the user has easy access for clothes shopping. We also want to give the the user a good experience like buying clothes online from Amazon, Old Navy, Zumiez and American Eagle. Our motivation is to make online shopping as easy as possible just by browsing for what you need through filter and adding coupons to your transactions so no one has to pay as much.
 
 ### Prior Art
-Prior arts to this project would be websites such as, Amazon, American Eagle, H&M, and etc. The design will be made based on what we feel like is the best design for UI/UX. 
+Prior arts to this project would be websites such as, Amazon, American Eagle, H&M, and etc. The design will be made based on what we feel like is the best design for UI/UX.
 
 ### Core User Workflows
-The User is able to browse through the clothes on the website by using the navbar that has different categories of clothes such as tops, pants, and shoes. Each item when you click on it will be a detail page of the specific item.  Once, the user tries to make a purchase, The user will need to make an account or log into an existing account. When the user is logged in or has made an account they are able to able as many thing clothing items into their cart. When it is time to checkout the site will redirect the user to a checkout page that will ask the user for basic information such as name, email, address, and credit card information. When all the information is filled in. The user can complete the order and the program will send the user an email with a summary of what the user has purchased.
-
+- Navbar: The User is able to browse through the clothes on the website by using the navbar that has different categories of clothes such as tops, pants, and shoes.
+- Detail Page: If a item is click, the user will then see that item detail page.
+- Checkout: Once, the user tries to make a purchase, the user will need to make an account or log into an existing account to continue with the transaction. Then the user basic information will be needed for shipping such as name, email, address, and credit card information.
+- Cart: All item that are selected will be added to the cart and then viewed later by the user.
+- Email Transaciton Information - When the order is completed by the user, then the program will send the user an email with a summary of what they have purchased.
 
 ### Daily Goals
 
@@ -16,10 +19,9 @@ The User is able to browse through the clothes on the website by using the navba
 
 The functionality we will add a landing/home page with the list of all the clothes, categories for the clothes, a navbar, admin access, cards for the clothes, with sign in/sign up buttons, styling css, bootstrap, add the buttons for the other pages.
 
-Andy - navbar, styling, adding  categories for clothes  
-Sean - user auth, roles for users, registration buttons, forms, styling  
-Charles - cards for the clothes, admin access  
-
+Andy - navbar, styling, adding  categories for clothes
+Sean - user auth, roles for users, registration buttons, forms, styling
+Charles - cards for the clothes, admin access
 
 
 #### Week 2
