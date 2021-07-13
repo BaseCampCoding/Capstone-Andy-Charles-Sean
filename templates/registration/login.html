@@ -3,7 +3,7 @@
 {% block title %}Log In{% endblock title %}
 
 {% block content %}
-<body style="background: #7abecc;">
+<body>
     <h2>Log In</h2>
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
