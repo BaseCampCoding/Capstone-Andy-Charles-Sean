@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
+from .models import Post
 # Create your views here.
 
-class HomePageview(TemplateView):
-    template_name = 'home.html'
+class HomeListView(ListView):
+    model=Post
+    template_name = 'index.html'
