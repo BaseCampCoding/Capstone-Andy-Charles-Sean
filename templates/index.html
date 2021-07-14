@@ -12,68 +12,74 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand ms-4" href="{% url 'home'   %}" id="title">Shelf Wear</a>
     {% if user.is_authenticated %}
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav" id="loginSignup">
-          <li class="nav-item active">
-          <form class="form-inline ml-auto">
-              <a  class="btn btn-primary ml-2">Log Out</a>
-          </form>
-          </li>
-      </ul>           
-  </div>
-  {% else %}
-  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-    <ul class="navbar-nav" id="dropdown">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav" id="loginSignup">
+                <li class="nav-item active">
+                <form class="form-inline ml-auto">
+                    <a  class="btn btn-primary ml-2">Log Out</a>
+                </form>
+                </li>
+            </ul>           
+        </div>
+    {% else %}
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav" id="dropdown">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </li>
+            </ul>
+        </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav" id="loginSignup">
-        <li class="nav-item active">
-          <form class="form-inline ml-auto">
-            <a  class="btn btn-primary me-2" href="{% url 'login' %}">Login</a>
-            <a  class="btn btn-primary me-3" href="{% url 'signup' %}">Sign up</a>
-        </form>
-      </li>
-    </ul>
-  </div>
-{% endif %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav" id="loginSignup">
+                <li class="nav-item active">
+                <form class="form-inline ml-auto">
+                    <a  class="btn btn-primary me-2" href="{% url 'login' %}">Login</a>
+                    <a  class="btn btn-primary me-3" href="{% url 'signup' %}">Sign up</a>
+                </form>
+            </li>
+            </ul>
+        </div>
+    {% endif %}
 
 </nav>
 <main>
   <header class="container mt-3">
-      {% if user.is_authenticated %}
-      {% else %}
-          <p>Go ahead and sign in</p>
-      {% endif %}
+        {% if user.is_authenticated %}
+        {% else %}
+            <p>Go ahead and sign in</p>
+        {% endif %}
   </header>
   <div class="container">
-      {% block content %}
-      {% for post in object_list %}
-            <div class="card post-entry" style="width: 18rem;">
-                <img class="card-img-top" src="{{ post.image.url }}" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-text"><b>{{ post.item }}</b></h4>
-                    <p class="card-text">$ {{ post.price }}</p>
-                    <p class="card-text"> {{ post.seller }}</p>
+        {% block content %}
+        {% for post in object_list %}
+        <div class="container">
+            <div class="row">
+            <div class="col-sm">
+                <div class="card post-entry" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ post.image.url }}" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-text"><b>{{ post.item }}</b></h4>
+                        <p class="card-text">$ {{ post.price }}</p>
+                        <p class="card-text"> {{ post.seller }}</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    
         {% endfor %}
       {% endblock content %}
   </div>
