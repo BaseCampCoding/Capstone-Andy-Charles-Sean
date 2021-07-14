@@ -77,16 +77,22 @@
         {% endif %}
   </header>
   <div class="container">
-      {% block content %}
-      {% for post in object_list %}
-            <div class="card post-entry" style="width: 18rem;">
-                <img class="card-img-top" src="{{ post.image.url }}" style="width:100%">
-                <div class="card-body">
-                    <h4 class="card-text"><b>{{ post.item }}</b></h4>
-                    <p class="card-text">$ {{ post.price }}</p>
-                    <p class="card-text"> {{ post.seller }}</p>
+        {% block content %}
+        {% for post in object_list %}
+        <div class="container">
+            <div class="row">
+            <div class="col-sm">
+                <div class="card post-entry" style="width: 18rem;">
+                    <img class="card-img-top" src="{{ post.image.url }}" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-text"><b>{{ post.item }}</b></h4>
+                        <p class="card-text">$ {{ post.price }}</p>
+                        <p class="card-text"> {{ post.seller }}</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    
         {% endfor %}
       {% endblock content %}
   </div>
