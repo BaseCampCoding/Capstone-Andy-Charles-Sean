@@ -1,23 +1,26 @@
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 30%;
-  left: -100px;
+#card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2) !important;
+  transition: 0.3s !important;
+  width: 30% !important;
+  left: -100px !important;
 }
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+#card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2) !important;
 }
 
-.container {
-  padding: 2px 16px;
+#container {
+  padding: 2px 16px !important;
 }
   
   
   
 img {
-    border-radius: 5px 5px 0 0;
-    width: 75%;
+    border-radius: 5px 5px 0 0 !important;
+    width: 75% !important;
     
 }
 
+#spaceOut {
+  padding: 500px !important;
+}
