@@ -20,7 +20,7 @@
           Dropdown
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a href="{% url 'post_new' %}">Sell</a></li>
           <li><a class="dropdown-item" href="#">Another action</a></li>
           <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
@@ -34,6 +34,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item active">
                 <form class="form-inline ml-auto">
+                    
                     <a  class="btn btn-primary me-2" href="{% url 'logout' %}">Log Out</a>
                 </form>
                 </li>
@@ -83,11 +84,12 @@
             <div class="row">
             <div class="col-sm">
                 <div class="card post-entry" style="width: 18rem;">
-                    <img class="card-img-top" src="{{ post.image.url }}" style="width:100%">
+                    <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" style="width:100%"></a>
                     <div class="card-body">
                         <h4 class="card-text"><b>{{ post.item }}</b></h4>
-                        <p class="card-text">$ {{ post.price }}</p>
+                        <p class="card-text">${{ post.price }}</p>
                         <p class="card-text"> {{ post.seller }}</p>
+                        
                     </div>
                 </div>
             </div>
