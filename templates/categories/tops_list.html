@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block title %}Artist Post{% endblock title %}
+
+{% block content %}
+    {% for item in all_item_list %}
+        {% if 'tops' in item.categories %}
+            <div class="card post-entry">
+                <img src="{{ post.image.url }}" style="width:100%">
+                <div class="container">
+                    <h4><b>{{ item }}</b></h4>
+                    <p>$ {{ price }}</p>
+                    <p> {{ seller }}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
