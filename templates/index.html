@@ -15,7 +15,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
     <div class="navbar-nav">
-      <a class="nav-link active" aria-current="page" href="#">Home</a>
+      <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
       <a class="nav-link" href="#">Best Seller</a>
     </div>
     <ul class="navbar-nav" id="dropdown">
@@ -38,7 +38,7 @@
     {% else %}
         <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
               <a class="nav-link" href="#">Best Seller</a>
             </div>
           <ul class="navbar-nav" id="dropdown">
