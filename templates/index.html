@@ -21,12 +21,12 @@
     <ul class="navbar-nav" id="dropdown">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Dropdown
+        Categories
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
           <li><a class="dropdown-item" href="{% url 'tops_list' %}">Tops</a></li>
-          <li><a class="dropdown-item" href="#">Pants</a></li>
-              <li><a class="dropdown-item" href="#">Shoes</a></li>
+          <li><a class="dropdown-item" href="{% url 'pants_list' %}">Pants</a></li>
+          <li><a class="dropdown-item" href="{% url 'shoes_list' %}">Shoes</a></li>
         </ul>
       </li>
     </ul>
@@ -44,12 +44,12 @@
         <ul class="navbar-nav" id="dropdown">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+            Category
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Tops</a></li>
-              <li><a class="dropdown-item" href="#">Pants</a></li>
-              <li><a class="dropdown-item" href="#">Shoes</a></li>
+              <li><a class="dropdown-item" href="{% url 'tops_list' %}">Tops</a></li>
+              <li><a class="dropdown-item" href="{% url 'pants_list' %}">Pants</a></li>
+              <li><a class="dropdown-item" href="{% url 'shoes_list' %}">Shoes</a></li>
             </ul>
           </li>
         </ul>
