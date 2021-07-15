@@ -10,7 +10,11 @@ class HomeListView(ListView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ['item', 'image', 'categories', 'seller', 'price']
+    fields = ['item', 'image', 'categories', 'price']
+
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        return super().form_valid(form)
 
 class PostDetailView(DetailView):
     model = Post
