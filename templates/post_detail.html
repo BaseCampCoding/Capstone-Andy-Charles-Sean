@@ -1,11 +1,13 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <div class="post-entry">
-        <img class="float-left" src="{{ post.image.url }}" style="width:100%">
-        <h2 class="float-right">{{ post.item }}</h2>
-        <p>{{ post.price }}</p>
-        <p>{{ post.seller }}</p>
+    <div class="card post-entry">
+        <img  class="card-img-top" src="{{ post.image.url }}" style="width:100%">
+        <div class="card-body">
+            <h4 class="card-text"><b>{{ post.item }}</b></h4>
+            <p class="card-text">${{ post.price }}</p>
+            <p class="card-text"> {{ post.seller }}</p>
+        </div>
     </div>
 
 {% endblock content %}
