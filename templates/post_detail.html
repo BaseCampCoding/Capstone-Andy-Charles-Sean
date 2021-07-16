@@ -1,13 +1,14 @@
 {% extends 'index.html' %}
-
+{% block title %}Detail Page{% endblock title %}
 {% block content %}
-    <div class="card post-entry">
-        <img  class="card-img-top" src="{{ post.image.url }}" style="width:100%">
-        <div class="card-body">
-            <h4 class="card-text"><b>{{ post.item }}</b></h4>
-            <p class="card-text">${{ post.price }}</p>
-            <p class="card-text"> {{ post.seller }}</p>
-        </div>
+    <div class="post-entry">
+        <img class="float-left" src="{{ post.image.url }}" style="width:100%">
+        <h2 class="float-right">{{ post.item }}</h2>
+        <h3>{{ post.categories }}</h3>
+        <p>{{ post.price }}</p>
+        <p>{{ post.seller }}</p>
     </div>
+
+
 
 {% endblock content %}

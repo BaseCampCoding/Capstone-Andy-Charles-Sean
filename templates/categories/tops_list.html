@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block title %}Tops Category{% endblock title %}
+
+{% block content %}
+    {% for item in all_tops_list %}
+        {% if 'tops' in item.categories %}
+            <div class="card post-entry">
+                <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
+                <div class="container">
+                    <h4><b>{{ item }}</b></h4>
+                    <p>$ {{ item.price}}</p>
+                    <p> {{ item.seller }}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
