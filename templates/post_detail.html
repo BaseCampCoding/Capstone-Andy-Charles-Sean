@@ -10,5 +10,16 @@
         <h3>{{ post.categories }}</h3>
         <p>{{ post.price }}</p>
         <p>{{ post.seller }}</p>
+        <div id="favorite">
+          {% if favorite %}
+            <a href="{% url 'favorite_post' post.pk %}">
+              <i class="fas fa-star"></i>
+            </a>
+          {% else %}
+            <a href="{% url 'favorite_post' post.pk %}">
+              <i class="far fa-star"></i>
+            </a>
+          {% endif %}
+        </div>
     </div>
 {% endblock content %}
