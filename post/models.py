@@ -29,7 +29,7 @@ class Post(models.Model):
     )
     price = models.IntegerField()
     favorite =  models.ManyToManyField(CustomUser, related_name='favorite', blank=True)
-    description = models.CharField(max_length=200, default="Description")
+    description = models.TextField(max_length=200, default="Description")
   
     def __str__(self):
         return self.item
@@ -54,6 +54,8 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = 'Addresses'
+
+
 class Review(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="reviews")
     review = models.CharField(max_length=140)

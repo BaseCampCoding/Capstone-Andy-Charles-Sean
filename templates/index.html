@@ -51,13 +51,8 @@
     </li>
   </ul>
   <div>
-    <a href="#"><img id="shopping-cart" src="https://icons.veryicon.com/png/o/miscellaneous/color-work-icon/shopping-cart-112.png" alt="shopping cart" style="width: 50px !important; height: 45px !important; margin-right: 10px !important; margin-top: 5px !important;"></a>
+    <a href="{% url 'summary' %}"><img id="shopping-cart" src="https://icons.veryicon.com/png/o/miscellaneous/color-work-icon/shopping-cart-112.png" alt="shopping cart" style="width: 50px !important; height: 45px !important; margin-right: 10px !important; margin-top: 5px !important;"></a>
   </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a  class="btn btn-primary me-2 ms-auto" href="{% url 'logout' %}">Log Out</a>
-    <a  class="btn btn-primary me-2 ms-auto" href="{% url 'summary' %}">Summary</a>
     {% else %}
       <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <div class="navbar-nav">

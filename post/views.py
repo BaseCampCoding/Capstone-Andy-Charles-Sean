@@ -1,16 +1,14 @@
 from django.http import request
-from django.urls.base import reverse
-from django.views.generic import ListView, CreateView,View
-from django.contrib import messages
+from django.views.generic import ListView, CreateView
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render , redirect
-from .forms import CheckoutForm
+from django.shortcuts import render , redirect, get_object_or_404
+from django.views.generic.base import View
+from django.views.generic.detail import DetailView
 from .models import Post, Address, Review
-from typing import Reversible
 from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse
-from django.views.generic.detail import DetailView
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from .forms import CheckoutForm
 # Create your views here.
 
 class HomeListView(ListView):
@@ -20,7 +18,7 @@ class HomeListView(ListView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ['item', 'image', 'categories', 'price']
+    fields = ['item', 'image', 'categories', 'price', 'description',]
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -42,13 +40,23 @@ class PostDetailView(DetailView):
 class TopsListView(ListView):
     model = Post
     template_name = 'categories/tops_list.html'
-    context_object_name = 'all_item_list'
+    context_object_name = 'all_tops_list'
 
 class ItemListView(ListView):
     model = Post
     template_name = 'summary.html'
     context_object_name = 'all_item_list'
 
+
+class PantsListView(ListView):
+    model = Post
+    template_name = 'categories/pants_list.html'
+    context_object_name = 'all_pants_list'
+
+class ShoesListView(ListView):
+    model = Post
+    template_name = 'categories/shoes_list.html'
+    context_object_name = 'all_shoes_list'
 
 class CheckoutView(View):
     def get(self, *args, **kwargs):
@@ -93,27 +101,8 @@ class CheckoutView(View):
 class PaymentView(View):
     def get(self, *args,**kwargs):
         return render(self.request, "payment.html")
-        
+    context_object_name = 'all_item_list'
 
-
-        
-
-
-
-
-
-
-    context_object_name = 'all_tops_list'
-
-class PantsListView(ListView):
-    model = Post
-    template_name = 'categories/pants_list.html'
-    context_object_name = 'all_pants_list'
-
-class ShoesListView(ListView):
-    model = Post
-    template_name = 'categories/shoes_list.html'
-    context_object_name = 'all_shoes_list'
 
 def FavoriteView(request, pk):
     post = get_object_or_404(Post, id=pk)
