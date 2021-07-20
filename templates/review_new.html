@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block title %}Add a review{% endblock title %}
+{% block content %}
+
+    <h1>Leave a review!</h1>
+    <form enctype="multipart/form-data" action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+
+{% endblock content %}

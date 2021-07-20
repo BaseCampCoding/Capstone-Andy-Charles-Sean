@@ -1,6 +1,6 @@
 from django.views.generic import ListView, CreateView
 from django.views.generic.detail import DetailView
-from .models import Post
+from .models import Post, Review
 # Create your views here.
 
 class HomeListView(ListView):
@@ -34,3 +34,13 @@ class ShoesListView(ListView):
     model = Post
     template_name = 'categories/shoes_list.html'
     context_object_name = 'all_shoes_list'
+
+
+class ReviewCreateView(CreateView):
+    model = Review
+    template_name = 'review_new.html'
+    fields = ['post', 'review', 'author',]
+
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        return super().form_valid(form)
