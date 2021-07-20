@@ -1,0 +1,95 @@
+{% extends 'index.html' %}
+{% block title %}Sell Item{% endblock title %}
+{% block content %}
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 33.33%; /* 25% for 4 cards */
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.account-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.account-card:hover {
+  background-color: antiquewhite;
+}
+
+.image img{
+  width: 100%;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  width: 160px !important;
+  height: 130px !important;
+}
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+</style>
+
+<div class="row">
+    <a href="{% url 'items_selling' object.pk %}" class="custom-card column">
+      <div class="account-card">
+          <div class="image">
+            <img class="account-image" src="https://img.icons8.com/cotton/2x/receive-change.png" alt="selling">
+          </div>
+          <hr>
+          <h3>Selling Items</h3>
+          <p>View all items posted</p>
+      </div>
+    </a>
+    <a href="{% url 'user_account_edit' object.pk %}" class="custom-card column">
+      <div class="account-card">
+          <div class="image">
+            <img class="account-image" src="https://i.ibb.co/W6QjxvB/shield.png" alt="Security">
+          </div>  
+          <hr>
+          <h3>Security</h3>
+          <p>Edit Username, Name and Role</p>
+      </div>
+    </a>
+    <a href="{% url 'post_favorite_list' %}" class="custom-card column">
+      <div class="account-card">
+          <div class="image">
+            <img class="account-image" src="https://image.flaticon.com/icons/png/128/3004/3004112.png" alt="Favorite">
+          </div>  
+          <hr>
+          <h3>Favorite</h3>
+          <p>View all your items</p>
+      </div>
+    </a>
+</div>
+{% endblock content %}

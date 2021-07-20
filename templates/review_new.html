@@ -1,8 +1,8 @@
 {% extends 'index.html' %}
-{% block title %}Sell Item{% endblock title %}
+{% block title %}Add a review{% endblock title %}
 {% block content %}
 
-    <h1>Sell your clothes!</h1>
+    <h1>Leave a review!</h1>
     <form enctype="multipart/form-data" action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}

@@ -3,12 +3,130 @@
 {% block title %}Log In{% endblock title %}
 
 {% block content %}
+<head>
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
 <body>
-    <h2>Log In</h2>
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
-        {{ form|crispy }}
-        <button class="btn btn-primary" type="submit">Log In</button>
+        <div class="wrapper">
+            <div class="row">
+                <h1>Login</h1>
+                <div class="form-control">
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                    <span class="toggle">
+                    <i class="fas fa-user"></i>
+                    </span>
+                </div>
+                <div class="form-control">
+                    {{ form.password }}
+                    {{ form.password.errors }}
+                    <span class="toggle" onclick="show$hide()">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <button class="btn" type="submit">
+                    <i class="fas fa-lock"></i> Login
+                </button>
+                <p>Don't have an account? <a class="redirect" href="href={% url 'signup' %}">Sign up now</a>
+            </div>
+        </div>
     </form>
 </body>
+
+<style>
+
+body {
+  background: linear-gradient(135deg, #dadada, #a5a5a5);
+}
+
+.wrapper {
+    width: 400px;
+    height: auto;
+    padding: 25px 7px;
+    background-color: #fff;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 7px;
+}
+
+.wrapper .row {
+  width: 80%;
+  position: relative;
+  margin: auto;
+}
+
+.wrapper h1 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+}
+
+.form-control {
+    border-width: 0px !important;
+}
+
+.wrapper input {
+  width: 100%;
+  padding: 0 40px 0 20px;
+  height: 50px;
+  border: none;
+  outline: none;
+  margin-bottom: 20px;
+  border-radius: 7px;
+  background-color: #f1f2f6;
+  font-size: 16px;
+}
+
+.wrapper .toggle {
+    position: relative;
+    cursor: pointer;
+}
+
+.wrapper .toggle i {
+  position: absolute;
+  top: 4px;
+  right: 15px;
+  color: #778ca3;
+}
+
+.wrapper .btn {
+  width: 100px;
+  padding: 10px;
+  margin: 0 0 8px 12px;
+  border-radius: 7px;
+  outline: none;
+  border: none;
+  color: #fff;
+  background: #0f6efd;
+  cursor: pointer;
+}
+
+.wrapper .redirect {
+  color: rgb(28, 126, 184);
+  cursor:pointer;
+  text-decoration: none;
+}
+</style>
+
+<script>
+const form_input = document.getElementsByTagName("input")
+form_input[1].placeholder = "Username"
+form_input[2].placeholder = "Password"
+form_input[2].id = "password"
+form_input[2].type = "password"
+function show$hide() {
+  let toggle = document.getElementsByClassName("toggle")[0];
+  let password = document.querySelector("#password");
+
+  if (password.getAttribute("type") == "password") {
+    password.setAttribute("type", "text");
+  } else {
+    password.setAttribute("type", "password")
+  }
+} 
+</script>
 {% endblock content %}

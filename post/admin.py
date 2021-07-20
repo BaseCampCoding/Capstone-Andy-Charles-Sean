@@ -1,7 +1,20 @@
 from django.contrib import admin
-from django.contrib.admin.filters import ListFilter
-from .models import Post
+from .models import Post, Review
 
 # Register your models here.
 
-admin.site.register(Post)
+
+
+
+class ReviewInline(admin.TabularInline):
+    model = Review
+    extra = 0
+
+class PostAdmin(admin.ModelAdmin):
+    inlines = [
+        ReviewInline,
+    ]
+
+
+admin.site.register(Post, PostAdmin)
+admin.site.register(Review)

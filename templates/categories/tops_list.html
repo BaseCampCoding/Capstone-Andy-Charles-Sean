@@ -1,18 +1,19 @@
 {% extends 'index.html' %}
-
-{% block title %}Artist Post{% endblock title %}
+{% block title %}Tops Category{% endblock title %}
 
 {% block content %}
-    {% for item in all_item_list %}
-        {% if 'tops' in item.categories %}
-            <div class="card post-entry">
-                <img src="{{ post.image.url }}" style="width:100%">
-                <div class="container">
-                    <h4><b>{{ item }}</b></h4>
-                    <p>$ {{ price }}</p>
-                    <p> {{ seller }}</p>
+    {% for item in all_tops_list %}
+        <div class="card-deck">
+            {% if 'tops' in item.categories %}
+              <div class="card" style="width: 18rem;">
+                <a href="{% url 'post_detail' item.pk %}"><img class="card-img-top" src="{{ item.image.url }}" ></a>
+                <div class="card-body">
+                  <h4 class="card-text"><b>{{ item.item }}</b></h4>
+                  <p class="card-text">${{ item.price }}</p>
+                  <p class="card-text"> {{ item.seller }}</p>
                 </div>
-            </div>
-        {% endif %}
+              </div>
+            {% endif %}
+        </div>
     {% endfor %}
 {% endblock content %}
