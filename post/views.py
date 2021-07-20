@@ -4,7 +4,7 @@ from django.urls.base import reverse
 from django.views.generic import ListView, CreateView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, Review
 # Create your views here.
 
 class HomeListView(ListView):
@@ -63,3 +63,12 @@ def FavoritePostList(request, **kwargs):
         "favorite_posts" : favorite_posts,
     }
     return render(request, "post_favorite_list.html", context)
+
+class ReviewCreateView(CreateView):
+    model = Review
+    template_name = 'review_new.html'
+    fields = ['post', 'review', 'author',]
+
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        return super().form_valid(form)

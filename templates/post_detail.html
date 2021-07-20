@@ -10,6 +10,7 @@
         <h3>{{ post.categories }}</h3>
         <p>{{ post.price }}</p>
         <p>{{ post.seller }}</p>
+        <p class="card-text">{{ post.description }}</p>
         <div id="favorite">
           {% if favorite %}
             <a href="{% url 'favorite_post' post.pk %}">
@@ -20,6 +21,39 @@
               <i class="far fa-star"></i>
             </a>
           {% endif %}
-        </div>
+    <div class="card-footer">
+        <a href="{% url 'review_new' %}">Leave a review</a>
+        {% for review in post.reviews.all %}
+            <p>
+                <span class="font-weight-bold">
+                    {{ review.author }} &middot;
+                </span>
+                {{ review }}
+            </p>
+        {% endfor %}
     </div>
+    <br>
+    <h3>Related Items</h3>
+    
+    <div class="card-deck">
+        <p>howdy</p>
+        {% for i in range %}
+            <p>howide</p>
+            {% if 'pants' in item.categories %}
+                <p>howdry</p>
+                <div class="card post-entry" style="width: 18rem;">
+                    <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
+                    <div class="container">
+                        <h4><b>{{ item }}</b></h4>
+                        <p>$ {{ item.price }}</p>
+                        <p> {{ item.seller }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+
+
+
 {% endblock content %}
