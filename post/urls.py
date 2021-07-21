@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import FavoritePostList, FavoriteView, HomeListView, PantsListView, PostCreateView, PostDetailView, ShoesListView, TopsListView, ReviewCreateView, CheckoutView, PaymentView,ItemListView
+from .views import FavoritePostList, FavoriteView, FemaleListView, HomeListView, MaleListView, PantsListView, PostCreateView, PostDetailView, ShoesListView, TopsListView, ReviewCreateView, CheckoutView, PaymentView,ItemListView
 
 urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name="post_new"),
@@ -13,6 +13,8 @@ urlpatterns = [
     path('payment/<payment_option>/', PaymentView.as_view, name='payment'),
     path('favorite/<int:pk>/', FavoriteView, name="favorite_post"),
     path('favorite_post/', FavoritePostList, name="post_favorite_list"),
-    path('review/new/', ReviewCreateView.as_view(), name='review_new')
+    path('review/new/', ReviewCreateView.as_view(), name='review_new'),
+    path('male/', MaleListView.as_view(), name='male_list'),
+    path('female', FemaleListView.as_view(), name='female_list'),
 ]
 
