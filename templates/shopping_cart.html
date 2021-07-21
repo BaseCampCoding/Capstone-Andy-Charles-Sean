@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h1>Shopping Cart</h1>
+    <div class="card-deck">
+        {{ shopping_cart_list.count }}
+        {% for post in shopping_cart_list %}    
+            <div class="card" style="width: 18rem;">
+                <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
+                <div class="card-body">
+                    <h4 class="card-text"><b>{{ post.item }}</b></h4>
+                    <p class="card-text">${{ post.price }}</p>
+                    <p class="card-text"> {{ post.seller }} </p>
+                </div>
+            </div>
+        {% empty %}
+            <div>
+                <h3>Your cart is empty</h3>
+                
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

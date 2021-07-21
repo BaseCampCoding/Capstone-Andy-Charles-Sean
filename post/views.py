@@ -15,6 +15,15 @@ class HomeListView(ListView):
     model = Post
     template_name = 'index.html'
 
+    def ShoppingCartView(request, **kwargs):
+        user = request.user
+        shopping_cart_list = user.cart.all()
+
+        context = {
+            "shopping_cart_list" : shopping_cart_list,
+        }
+        return render(request, "shopping_cart.html", context)
+
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post_new.html'
@@ -32,20 +41,21 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         TFLC = get_object_or_404(Post, id=self.kwargs['pk'])
         favorite = False
+        cart = False
         if TFLC.favorite.filter(id=self.request.user.id).exists():
             favorite = True
+
+        if TFLC.cart.filter(id=self.request.user.id).exists():
+            cart = True
+
         context["favorite"] = favorite
+        context["cart"] = cart
         return context
 
 class TopsListView(ListView):
     model = Post
     template_name = 'categories/tops_list.html'
     context_object_name = 'all_tops_list'
-
-class ItemListView(ListView):
-    model = Post
-    template_name = 'summary.html'
-    context_object_name = 'all_item_list'
 
 
 class PantsListView(ListView):
@@ -120,10 +130,27 @@ def FavoritePostList(request, **kwargs):
     }
     return render(request, "post_favorite_list.html", context)
 
+def CartView(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    if post.cart.filter(id=request.user.id).exists():
+        post.cart.remove(request.user)
+    else:
+        post.cart.add(request.user)
+    return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
+
+def ShoppingCartView(request, **kwargs):
+        user = request.user
+        shopping_cart_list = user.cart.all()
+
+        context = {
+            "shopping_cart_list" : shopping_cart_list,
+        }
+        return render(request, "shopping_cart.html", context)
+
 class ReviewCreateView(CreateView):
     model = Review
     template_name = 'review_new.html'
-    fields = ['post', 'review', 'author',]
+    fields = ['post', 'review', 'author']
 
     def form_valid(self, form):
         form.instance.seller = self.request.user

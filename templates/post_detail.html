@@ -4,51 +4,117 @@
 {% block title %}Detail Page{% endblock title %}
 
 {% block content %}
-    <div class="post-entry" style="width: 18rem;">
-        <img class="float-left" src="{{ post.image.url }}" style="width:100%">
-        <h2 class="float-right">{{ post.item }}</h2>
-        <h3>{{ post.categories }}</h3>
-        <p>${{ post.price }}</p>
-        <p>{{ post.seller }}</p>
-        <p class="card-text">{{ post.description }}</p>
-        <div id="favorite">
-          {% if favorite %}
-            <a href="{% url 'favorite_post' post.pk %}">
-              <i class="fas fa-star"></i>
-            </a>
-          {% else %}
-            <a href="{% url 'favorite_post' post.pk %}">
-              <i class="far fa-star"></i>
-            </a>
-          {% endif %}
-    <div class="card-footer">
-        <a href="{% url 'review_new' %}">Leave a review</a>
-        {% for review in post.reviews.all %}
-            <p>
-                <span class="font-weight-bold">
-                    {{ review.author }} &middot;
-                </span>
-                {{ review }}
-            </p>
-        {% endfor %}
+<style>
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+
+  .one {
+    margin-left: 10px;
+    grid-column: 1 / 2;
+    grid-row: 1 / 3 ;
+  }
+
+  .two {
+    margin-left: 30px;
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+  }
+
+  .three {
+    grid-column: 2 / 4;
+    grid-row: 4;
+  }
+
+  .cart {
+    background-color: blanchedalmond;
+    grid-column: 4;
+    grid-row: 1 / 5;
+  }
+
+  .review {
+    margin-left: 10px;
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+  }
+
+  .favorite {
+    display: flex;
+    justify-content: flex-end;
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+</style>
+  <div class="wrapper">
+    <div class="one">
+      <img class="float-left" src="{{ post.image.url }}" style="width:100%">
+    </div>
+    <div class="two">
+      <h2 class="float-right">{{ post.item }}</h2>
+      <h3>{{ post.categories }}</h3>
+      <p>${{ post.price }}</p>
+      <p>{{ post.seller }}</p>
+      <hr>
+      <ul>
+        <li class="card-text">{{ post.description }}</li>
+      </ul>
+    </div>
+    <div class="cart">
+      {% if cart %}
+        <a href="{% url 'shopping' object.pk %}">
+          <i class="fas fa-star"></i>Check out
+        </a>
+      {% else %}
+        <a href="{% url 'shopping' object.pk %}">
+          <i class="far fa-star"></i>
+        </a>
+      {% endif %}
+    </div>
+    <div class="favorite">
+      {% if favorite %}
+        <a href="{% url 'favorite_post' post.pk %}">
+          <i class="fas fa-star"></i>Favorite
+        </a>
+      {% else %}
+        <a href="{% url 'favorite_post' post.pk %}">
+          <i class="far fa-star"></i>
+        </a>
+      {% endif %}
+    </div>
+    <div class="card-footer review">
+      <a href="{% url 'review_new' %}">Leave a review</a>
+      {% for review in post.reviews.all %}
+          <p>
+              <span class="font-weight-bold">
+                  {{ review.author }} &middot;
+              </span>
+              {{ review }}
+          </p>
+      {% endfor %}
     </div>
     <br>
-    <h3>Related Items</h3>      
+    <div class="three">
+      <h3>Related Items</h3>      
       <div class="card-deck">
-          <p>howdy</p>
-          {% for item in object_list %}
-              <p>howide</p>
-              {% if post.categories in item.categories %}
-                  <p>howdry</p>
-                  <div class="card post-entry" style="width: 18rem;">
-                      <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
-                      <div class="container">
-                          <h4><b>{{ item }}</b></h4>
-                          <p>$ {{ item.price }}</p>
-                          <p> {{ item.seller }}</p>
-                      </div>
-                  </div>
-              {% endif %}
-          {% endfor %}
+        <p>howdy</p>
+        {% for item in object_list %}
+            <p>howide</p>
+            {% if post.categories in item.categories %}
+                <p>howdry</p>
+                <div class="card post-entry" style="width: 18rem;">
+                    <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
+                    <div class="container">
+                        <h4><b>{{ item }}</b></h4>
+                        <p>$ {{ item.price }}</p>
+                        <p> {{ item.seller }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
       </div>
+    </div>
 {% endblock content %}

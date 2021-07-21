@@ -27,8 +27,9 @@ class Post(models.Model):
         get_user_model(),
         on_delete=models.CASCADE,
     )
-    price = models.IntegerField()
+    price = models.DecimalField(max_digits=9, decimal_places=2)
     favorite =  models.ManyToManyField(CustomUser, related_name='favorite', blank=True)
+    cart = models.ManyToManyField(CustomUser, related_name='cart', blank=True)
     description = models.TextField(max_length=200, default="Description")
   
     def __str__(self):
@@ -37,7 +38,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
 
-
+    def total_items(self):
+        return self.item.count()
+        
 
 class Address(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
