@@ -19,10 +19,16 @@ class Post(models.Model):
     ('pants', "Pants"),
     ('shoes', "Shoes")
     ]
+
+    MORF= [
+        ('male', "Male"),
+        ('female', 'Female')
+    ]
     
     image = models.ImageField(null=True, upload_to=None, height_field=None, width_field=None, max_length=100, )
     item  = models.CharField(max_length=64)
     categories = models.CharField(max_length=5, choices=CATEGORIES, default="Tops")
+    MorF = models.CharField(max_length=6, choices=MORF, default="Male")
     seller = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
@@ -71,3 +77,15 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         return reverse_lazy('post_detail', args=[str(self.post.id)])
+
+
+
+class MorF(models.Model):
+    name = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return 'home'
+

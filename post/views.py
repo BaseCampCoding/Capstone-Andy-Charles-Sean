@@ -27,7 +27,7 @@ class HomeListView(ListView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ['item', 'image', 'categories', 'price', 'description',]
+    fields = ['item', 'image', 'categories', 'MorF', 'price', 'description',]
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -155,3 +155,15 @@ class ReviewCreateView(CreateView):
     def form_valid(self, form):
         form.instance.seller = self.request.user
         return super().form_valid(form)
+        
+class MaleListView(ListView):
+    model = Post
+    template_name = 'Gender/male_list.html'
+    context_object_name = 'all_items_list'
+
+
+
+class FemaleListView(ListView):
+    model = Post
+    template_name = 'Gender/female_list.html'
+    context_object_name = 'all_itmes_list'
