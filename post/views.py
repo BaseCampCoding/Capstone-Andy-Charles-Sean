@@ -1,3 +1,4 @@
+from django.db.models.fields import CommaSeparatedIntegerField
 from django.http import request
 from django.views.generic import ListView, CreateView
 from django.core.exceptions import ObjectDoesNotExist
@@ -6,9 +7,9 @@ from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
-from django.urls.base import reverse
+from django.urls.base import reverse, reverse_lazy
 from django.contrib import messages
-from .forms import CheckoutForm
+from .forms import CheckoutForm, ReviewForm
 # Create your views here.
 
 class HomeListView(ListView):
@@ -50,6 +51,7 @@ class PostDetailView(DetailView):
 
         context["favorite"] = favorite
         context["cart"] = cart
+        context['related_items'] = Post.get_related_items(TFLC)
         return context
 
 class TopsListView(ListView):
@@ -149,21 +151,25 @@ def ShoppingCartView(request, **kwargs):
 
 class ReviewCreateView(CreateView):
     model = Review
+    form_class = ReviewForm
     template_name = 'review_new.html'
-    fields = ['post', 'review', 'author']
+    #fields='__all__'
+    success_url=reverse_lazy('home')
 
     def form_valid(self, form):
-        form.instance.seller = self.request.user
+        form.instance.author = self.request.user
+        form.instance.post_id = self.request.resolver_match.kwargs['pk']
         return super().form_valid(form)
         
 class MaleListView(ListView):
     model = Post
     template_name = 'Gender/male_list.html'
-    context_object_name = 'all_items_list'
 
 
 
 class FemaleListView(ListView):
     model = Post
     template_name = 'Gender/female_list.html'
-    context_object_name = 'all_itmes_list'
+
+
+    

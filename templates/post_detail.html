@@ -86,7 +86,7 @@
       {% endif %}
     </div>
     <div class="card-footer review">
-      <a href="{% url 'review_new' %}">Leave a review</a>
+      <a href="{% url 'review_new' post.pk %}">Leave a review</a>
       {% for review in post.reviews.all %}
           <p>
               <span class="font-weight-bold">
@@ -100,11 +100,7 @@
     <div class="three">
       <h3>Related Items</h3>      
       <div class="card-deck">
-        <p>howdy</p>
-        {% for item in object_list %}
-            <p>howide</p>
-            {% if post.categories in item.categories %}
-                <p>howdry</p>
+        {% for item in related_items %}
                 <div class="card post-entry" style="width: 18rem;">
                     <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
                     <div class="container">
@@ -113,7 +109,7 @@
                         <p> {{ item.seller }}</p>
                     </div>
                 </div>
-            {% endif %}
+            
         {% endfor %}
       </div>
     </div>
