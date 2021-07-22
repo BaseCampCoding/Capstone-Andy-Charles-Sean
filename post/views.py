@@ -1,30 +1,17 @@
 from django.http import request
 from django.views.generic import ListView, CreateView
 from django.core.exceptions import ObjectDoesNotExist
-<<<<<<< HEAD
-from django.shortcuts import render , redirect
 from django.views.generic.base import TemplateView
 from .forms import CheckoutForm
-=======
 from django.shortcuts import render , redirect, get_object_or_404
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
->>>>>>> 409b45acaa945fedda051c121b4beebcddab4fec
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse
-<<<<<<< HEAD
-from django.views.generic.detail import DetailView
-from django.shortcuts import render, get_object_or_404
-from django.conf import settings
-
-
-
-import stripe
-=======
 from django.contrib import messages
-from .forms import CheckoutForm
->>>>>>> 409b45acaa945fedda051c121b4beebcddab4fec
+from django.conf import settings
+import stripe
 # Create your views here.
 
 

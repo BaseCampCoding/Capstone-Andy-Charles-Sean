@@ -1,11 +1,9 @@
 from django.urls import path
 from .views import (
-    FavoritePostList, FavoriteView, HomeListView, PantsListView, PostCreateView, PostDetailView, ShoesListView, SuccessView, TopsListView, ReviewCreateView, CheckoutView, PaymentView,ItemListView,
-
     CartView, FavoritePostList, FavoriteView, HomeListView,
     PantsListView, PostCreateView, PostDetailView, ShoesListView,
     ShoppingCartView, TopsListView, ReviewCreateView, CheckoutView,
-    PaymentView, FemaleListView, MaleListView,
+    PaymentView, FemaleListView, MaleListView,  SuccessView,
     )
 
 urlpatterns = [
