@@ -52,6 +52,10 @@ class Post(models.Model):
 
     def total_items(self):
         return self.item.count()
+
+    @staticmethod
+    def get_related_items(post: 'Post'):
+        return Post.objects.filter(categories=post.categories, MorF=post.MorF).exclude(id=post.id)
         
 
 class Address(models.Model):

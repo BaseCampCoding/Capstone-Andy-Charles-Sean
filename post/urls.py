@@ -19,9 +19,10 @@ urlpatterns = [
     path('payment/', PaymentView.as_view(), name='payment'),
     path('favorite/<int:pk>/', FavoriteView, name="favorite_post"),
     path('favorite_post/', FavoritePostList, name="post_favorite_list"),
-    path('review/new/', ReviewCreateView.as_view(), name='review_new'),
+    path('post/<int:pk>/review', ReviewCreateView.as_view(), name='review_new'),
     path('success/', SuccessView.as_view(),name = 'success'),
     path('male/', MaleListView.as_view(), name='male_list'),
-    path('female', FemaleListView.as_view(), name='female_list'),
+    path('female/', FemaleListView.as_view(), name='female_list'),
+    
 ]
 
