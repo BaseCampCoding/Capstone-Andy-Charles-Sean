@@ -18,25 +18,22 @@
                     <div class="form-control">
                         {{ form.first_name }}
                         <span class="toggle">
-                        <i class="fas fa-user"></i>
+                            <i class="fas fa-user"></i>
                         </span>
                     </div>
                     <div class="form-control">
                         {{ form.last_name }}
                         <span class="toggle">
-                        <i class="fas fa-user"></i>
+                            <i class="fas fa-user"></i>
                         </span>
                     </div>
                     <div class="form-control">
                         {{ form.roles }}
-                        <span class="toggle">
-                        <i class="fas fa-user"></i>
-                        </span>
                     </div>
                     <div class="form-control">
                         {{ form.email }}
                         <span class="toggle">
-                        <i class="fas fa-user"></i>
+                            <i class="fas fa-envelope"></i>
                         </span>
                     </div>
                     <div class="form-control">
@@ -47,9 +44,6 @@
                     </div>
                     <div class="form-control">
                         {{ form.password2 }}
-                        <span class="toggle" onclick="show$hide()">
-                            <i class="fas fa-eye"></i>
-                        </span>
                     </div>
                     <button class="btn" type="submit">
                         Sign Up
@@ -58,4 +52,119 @@
             </div>
     </form>
 </body>
+
+<style>
+
+body {
+    background: #a5a5a5;    
+}
+
+.wrapper {
+    width: 600px;
+    height: auto;
+    padding: 25px 7px;
+    background-color: #fff;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 7px;
+    margin-top: 70px;
+}
+
+.wrapper .row {
+    width: 80%;
+    position: flex;
+    margin: auto;
+}
+
+.wrapper h1 {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+}
+
+.form-control {
+    border-width: 0px !important;
+}
+
+#password2 {
+    padding-right: 10px !important;
+}
+
+/* #first_name, #last_name {
+    padding-right: 5px !important;
+} */
+
+.wrapper input {
+    width: 100%;
+    padding: 0 40px 0 20px;
+    height: 50px;
+    border: none;
+    outline: none;
+    margin-bottom: 20px;
+    border-radius: 7px;
+    background-color: #f1f2f6;
+    font-size: 16px;
+}
+
+.wrapper .toggle {
+    position: relative;
+    cursor: pointer;
+}
+
+.wrapper .toggle i {
+    position: absolute;
+    top: 4px;
+    right: 15px;
+    color: #778ca3;
+}
+
+.wrapper .btn {
+    width: 100px;
+    padding: 10px;
+    margin: 0 0 8px 12px;
+    border-radius: 7px;
+    outline: none;
+    border: none;
+    color: #fff;
+    background: #0f6efd;
+    cursor: pointer;
+}
+
+.wrapper .redirect {
+    color: rgb(28, 126, 184);
+    cursor:pointer;
+    text-decoration: none;
+}
+</style>
+
+<script>
+    const form_input = document.getElementsByTagName("input")
+    form_input[1].placeholder = "Username"
+    form_input[2].placeholder = "First Name"
+    form_input[2].id = "first_name"
+    form_input[3].placeholder = "Last Name"
+    form_input[3].id = "last_name"
+    form_input[4].placeholder = "Email"
+    form_input[5].placeholder = "Password"
+    form_input[5].id = "password"
+    form_input[5].type = "password"
+    form_input[6].placeholder = "Re-enter password"
+    form_input[6].id = "password2"
+    form_input[6].type = "password"
+
+    function show$hide() {
+      let password = document.querySelector("#password");
+      let password2 = document.querySelector("#password2");
+    
+      if (password.getAttribute("type") == "password" && password2.getAttribute("type") == "password") {
+        password.setAttribute("type", "text");
+        password2.setAttribute("type", "text");
+      } else {
+        password.setAttribute("type", "password")
+        password2.setAttribute("type", "password")
+      }
+    } 
+    </script>
 {% endblock content%}

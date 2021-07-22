@@ -35,6 +35,8 @@
             <li><a class="dropdown-item" href="{% url 'tops_list' %}">Tops</a></li>
             <li><a class="dropdown-item" href="{% url 'pants_list' %}">Pants</a></li>
             <li><a class="dropdown-item" href="{% url 'shoes_list' %}">Shoes</a></li>
+            <li><a class="dropdown-item" href="{% url 'male_list' %}">Men's</a></li>
+            <li><a class="dropdown-item" href="{% url 'female_list' %}">Women's</a></li>
           </ul>
       </li>
     </ul>
@@ -45,19 +47,14 @@
           {{ user.username }}
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><a class="dropdown-item" href="{% url 'user_account' user.pk%}"><i class="fas fa-user-circle"></i>&nbsp; Account</a></li>
+          <li><a class="dropdown-item" href="{% url 'user_account' user.pk %}"><i class="fas fa-user-circle"></i>&nbsp; Account</a></li>
           <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp; Log Out</a></li>
         </ul>
     </li>
   </ul>
   <div>
-    <a href="#"><img id="shopping-cart" src="https://icons.veryicon.com/png/o/miscellaneous/color-work-icon/shopping-cart-112.png" alt="shopping cart" style="width: 50px !important; height: 45px !important; margin-right: 10px !important; margin-top: 5px !important;"></a>
+    <a href="{% url 'shopping_cart' %}"><img id="shopping-cart" src="https://icons.veryicon.com/png/o/miscellaneous/color-work-icon/shopping-cart-112.png" alt="shopping cart" style="width: 50px !important; height: 45px !important; margin-right: 10px !important; margin-top: 5px !important;"></a>
   </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a  class="btn btn-primary me-2 ms-auto" href="{% url 'logout' %}">Log Out</a>
-    <a  class="btn btn-primary me-2 ms-auto" href="{% url 'summary' %}">Summary</a>
     {% else %}
       <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <div class="navbar-nav">
@@ -73,6 +70,7 @@
               <li><a class="dropdown-item" href="{% url 'tops_list' %}">Tops</a></li>
               <li><a class="dropdown-item" href="{% url 'pants_list' %}">Pants</a></li>
               <li><a class="dropdown-item" href="{% url 'shoes_list' %}">Shoes</a></li>
+              
             </ul>
           </li>
         </ul>
