@@ -3,10 +3,6 @@ from post.models import Review
 from django import forms
 from django_countries.fields import CountryField
 
-PAYMENT_CHOICES = (
-    ("S", 'Stripe'),
-    ('P', 'PayPal')
-)
 
 
 class CheckoutForm(forms.Form):

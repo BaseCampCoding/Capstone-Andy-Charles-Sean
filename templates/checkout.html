@@ -142,7 +142,24 @@
     
 
               <!-- <hr class="mb-4"> -->
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to payment</button>
+              <button class="btn btn-primary btn-lg btn-block" type="submit" id="buy_now_btn">Continue to payment</button>
+              <script src="https://js.stripe.com/v3/"></script>
+
+                <script>
+                    var stripe =  Stripe('{{ stripe_public_key }}');
+                    const buy_now_button = document.querySelector('#buy_now_btn')
+
+                    buy_now_button.addEventListener('click', event => {
+
+                        stripe.redirectToCheckout({
+                        sessionId: '{{ session_id }}'
+                    }).then(function(result){
+
+                    });
+
+                })
+                    
+                </script>
 
             </form>
 
