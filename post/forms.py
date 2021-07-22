@@ -2,10 +2,6 @@
 from django import forms
 from django_countries.fields import CountryField
 
-PAYMENT_CHOICES = (
-    ("S", 'Stripe'),
-    ('P', 'PayPal')
-)
 
 
 class CheckoutForm(forms.Form):
@@ -19,5 +15,3 @@ class CheckoutForm(forms.Form):
     zip = forms.CharField(required=False)
     same_shipping_address =forms.BooleanField(required=False)
     save_info = forms.BooleanField(required=False)    
-    payment_option = forms.ChoiceField(widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
-

@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView,View
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render , redirect
+from django.views.generic.base import TemplateView
 from .forms import CheckoutForm
 from .models import Post, Address, Review
 from typing import Reversible
@@ -11,7 +12,14 @@ from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, get_object_or_404
+from django.conf import settings
+
+
+
+import stripe
 # Create your views here.
+
+
 
 class HomeListView(ListView):
     model = Post
@@ -50,11 +58,31 @@ class ItemListView(ListView):
     context_object_name = 'all_item_list'
 
 
+class SuccessView(TemplateView):
+    template_name = 'success.html'
+
+
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         form = CheckoutForm()
         context = {
             'form' : form 
+        }
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        YOUR_DOMAIN = "http://127.0.0.1:8000"
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price': 'price_1JFmozHSf7eLd1MvcHrP9xCw',
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url=YOUR_DOMAIN + '/success/',
+            cancel_url=YOUR_DOMAIN + '/cancel/'
+    )
+        context = {
+            'session_id': session.id,
+            'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY
         }
         return render(self.request, "checkout.html", context)
 
@@ -63,8 +91,8 @@ class CheckoutView(View):
         try:
             # order = Post.objects.get(user=self.request.user, ordered=False)
             if form.is_valid():
-                street_address = form.cleaned_data.get('street_address')
-                apartment_address = form.cleaned_data.get('apartment_address')
+                street_address = form.cleaned_data.get('address')
+                apartment_address = form.cleaned_data.get('address2')
                 country = form.cleaned_data.get('country')
                 zip = form.cleaned_data.get('zip')
                 same_shipping_address = form.cleaned_data.get('same_shipping_address')
@@ -84,8 +112,6 @@ class CheckoutView(View):
 
 
                 return redirect('checkout')
-            messages.warning(self.request, "Failed checkout")
-            return redirect('checkout')
         except ObjectDoesNotExist:
             messages.error(self.request, 'you do not have an active order')
             return redirect("summary")
@@ -93,17 +119,8 @@ class CheckoutView(View):
 class PaymentView(View):
     def get(self, *args,**kwargs):
         return render(self.request, "payment.html")
-        
 
-
-        
-
-
-
-
-
-
-    context_object_name = 'all_tops_list'
+    # context_object_name = 'all_tops_list'
 
 class PantsListView(ListView):
     model = Post
@@ -139,3 +156,4 @@ class ReviewCreateView(CreateView):
     def form_valid(self, form):
         form.instance.seller = self.request.user
         return super().form_valid(form)
+

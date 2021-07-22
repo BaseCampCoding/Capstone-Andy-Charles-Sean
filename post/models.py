@@ -37,6 +37,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
 
+    def get_display_price(self):
+        return "{0:.2f}".format(self.price / 100)
+
 
 
 class Address(models.Model):
