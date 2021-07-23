@@ -21,7 +21,7 @@ class Post(models.Model):
     ]
 
     MORF= [
-        ('male', "Male"),
+        ('male', 'Male'),
         ('female', 'Female')
     ]
     

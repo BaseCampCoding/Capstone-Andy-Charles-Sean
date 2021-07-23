@@ -14,6 +14,7 @@ from django.contrib import messages
 from .forms import CheckoutForm, ReviewForm
 from django.conf import settings
 import stripe
+from django.db.models import Q, QuerySet
 # Create your views here.
 
 class HomeListView(ListView):
@@ -201,5 +202,15 @@ class FemaleListView(ListView):
     model = Post
     template_name = 'Gender/female_list.html'
 
-
+class SearchListView(ListView):
+    model = Post
+    template_name = 'search.html'
+    def get_queryset(self):
+        q = self.request.GET.get('q')
+        posts = Post.objects.filter(
+            Q(item__icontains=q) |
+            Q(description__icontains=q) |
+            Q(seller__username__icontains=q)
+        )
+        return posts
     

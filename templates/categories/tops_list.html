@@ -1,9 +1,9 @@
 {% extends 'index.html' %}
 {% block title %}Tops Category{% endblock title %}
-
+{% load static %}
 {% block content %}
+<div class="card-deck">
     {% for item in all_tops_list %}
-        <div class="card-deck">
             {% if 'tops' in item.categories %}
               <div class="card" style="width: 18rem;">
                 <a href="{% url 'post_detail' item.pk %}"><img class="card-img-top" src="{{ item.image.url }}" ></a>
@@ -14,6 +14,7 @@
                 </div>
               </div>
             {% endif %}
-        </div>
     {% endfor %}
+</div>
+    
 {% endblock content %}

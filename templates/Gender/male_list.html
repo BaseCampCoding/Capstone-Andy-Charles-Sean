@@ -2,6 +2,7 @@
 {% block title %}Male Category{% endblock title %}
 
 {% block content %}
+<div class="card-deck">
     {% for item in object_list %}
         <div class="card-deck">
             {% if 'male' in item.gender %}
@@ -14,6 +15,6 @@
                 </div>
               </div>
             {% endif %}
-        </div>
     {% endfor %}
+</div>
 {% endblock content %}

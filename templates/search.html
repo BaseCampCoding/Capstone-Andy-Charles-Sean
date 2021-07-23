@@ -1,10 +1,9 @@
 {% extends 'index.html' %}
-{% block title %}Pants Category{% endblock title %}
+{% block title %}Search{% endblock title %}
 
 {% block content %}
 <div class="card-deck">
-    {% for item in all_pants_list %}
-        {% if 'pants' in item.categories %}
+    {% for item in object_list %}
             <div class="card post-entry" style="width: 18rem;">
                 <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
                 <div class="container">
@@ -13,7 +12,6 @@
                     <p> {{ item.seller }}</p>
                 </div>
             </div>
-        {% endif %}
     {% endfor %}
 </div>
 {% endblock content %}
