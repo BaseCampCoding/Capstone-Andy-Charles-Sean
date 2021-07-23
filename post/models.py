@@ -28,7 +28,7 @@ class Post(models.Model):
     image = models.ImageField(null=True, upload_to=None, height_field=None, width_field=None, max_length=100, )
     item  = models.CharField(max_length=64)
     categories = models.CharField(max_length=5, choices=CATEGORIES, default="Tops")
-    MorF = models.CharField(max_length=6, choices=MORF, default="Male")
+    gender = models.CharField(max_length=6, choices=MORF, default="Male")
     seller = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
@@ -55,7 +55,7 @@ class Post(models.Model):
 
     @staticmethod
     def get_related_items(post: 'Post'):
-        return Post.objects.filter(categories=post.categories, MorF=post.MorF).exclude(id=post.id)
+        return Post.objects.filter(categories=post.categories, gender=post.gender).exclude(id=post.id)
         
 
 class Address(models.Model):

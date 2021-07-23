@@ -16,7 +16,7 @@ class CheckoutForm(forms.Form):
     zip = forms.CharField(required=False)
     same_shipping_address =forms.BooleanField(required=False)
     save_info = forms.BooleanField(required=False)    
-    payment_option = forms.ChoiceField(widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+    payment_option = forms.ChoiceField(widget=forms.RadioSelect)
 
 class ReviewForm(forms.ModelForm):
     class Meta:

@@ -4,7 +4,7 @@
 {% block content %}
     {% for item in object_list %}
         <div class="card-deck">
-            {% if 'male' in item.MorF %}
+            {% if 'male' in item.gender %}
               <div class="card" style="width: 18rem;">
                 <a href="{% url 'post_detail' item.pk %}"><img class="card-img-top" src="{{ item.image.url }}" ></a>
                 <div class="card-body">

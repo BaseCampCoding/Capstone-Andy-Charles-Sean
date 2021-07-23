@@ -47,7 +47,6 @@
     grid-column: 3;
     grid-row: 1;
   }
-
 </style>
   <div class="wrapper">
     <div class="one">
@@ -88,28 +87,27 @@
     <div class="card-footer review">
       <a href="{% url 'review_new' post.pk %}">Leave a review</a>
       {% for review in post.reviews.all %}
-          <p>
-              <span class="font-weight-bold">
-                  {{ review.author }} &middot;
-              </span>
-              {{ review }}
-          </p>
+        <p>
+            <span class="font-weight-bold">
+                {{ review.author }} &middot;
+            </span>
+            {{ review }}
+        </p>
       {% endfor %}
     </div>
     <br>
     <div class="three">
-      <h3>Related Items</h3>      
+      <h3>Related Items</h3>
       <div class="card-deck">
         {% for item in related_items %}
-                <div class="card post-entry" style="width: 18rem;">
-                    <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
-                    <div class="container">
-                        <h4><b>{{ item }}</b></h4>
-                        <p>$ {{ item.price }}</p>
-                        <p> {{ item.seller }}</p>
-                    </div>
-                </div>
-            
+          <div class="card post-entry" style="width: 18rem;">
+              <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
+              <div class="container">
+                <h4><b>{{ item }}</b></h4>
+                <p>$ {{ item.price }}</p>
+                <p> {{ item.seller }}</p>
+              </div>
+          </div>
         {% endfor %}
       </div>
     </div>

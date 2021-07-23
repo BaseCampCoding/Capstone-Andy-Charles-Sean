@@ -3,11 +3,11 @@
 {% block content %}
 <style>
 .product-image { float: left; width: 25%; margin-right: 20px; color:rgb(255, 255, 255)}
-.product-details { float: left; width: 30%; }
-.product-price { float: left; width: 10%; }
-.product-quantity { float: left; width: 10%; }
-.product-removal { float: left; width: 9%; }
-.product-line-price { float: left; width: 13%; text-align: right; }
+.product-details { float: left; width: 44%; }
+.product-removal { float: left; width: 18%; text-align: center;}
+.product-price { float: left; width: 10%; text-align: center; margin-left: 10px !important;}
+.product-quantity { float: left; width: 1%; }
+.product-line-price { float: left; width: 1%; text-align: center; }
 
 
 /* This is used as the traditional .clearfix class */
@@ -15,12 +15,10 @@
 .group:after {
     content: '';
     display: table;
-} 
+}
+
 .group:after {
     clear: both;
-}
-.group {
-    zoom: 1;
 }
 
 /* Apply dollar signs */
@@ -36,12 +34,13 @@ h1 {
 
 label {
   color: #aaa;
+  margin-right: 1px;
 }
 
 .shopping-cart {
-    display: flex;
-    flex-direction: column;
-    margin-top: -32px;
+  display: flex;
+  flex-direction: column;
+  margin-top: -32px;
 }
 
 
@@ -49,16 +48,24 @@ label {
 .product {
   margin-bottom: 20px;  
   border-top: .5px solid grey;
+  margin-right: -20px !important;
   background-color: rgb(236, 236, 236);
 }
 
 .product .product-image {
-    text-align: center;
+  text-align: center;
 }
 
 .product-details .product-description {
-      margin: 5px 20px 5px 0;
-      line-height: 1.4em;
+  margin: 5px 20px 5px 0;
+  line-height: 1.4em;
+}
+
+.product-price-detail {
+  float: left; width: 10%;
+  text-align: center;
+  font-weight: bolder;
+  margin-top: 10px;
 }
 
 .product-quantity input {
@@ -66,204 +73,156 @@ label {
 }
 
 .remove-product {
-    border: 0;
-    padding: 4px 8px;
-    background-color: #c66;
-    color: #fff;
-    font-family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
-    font-size: 12px;
-    border-radius: 3px;
+  border: 0;
+  padding: 4px 8px;
+  background-color: #c66;
+  color: #fff;
+  font-family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
+  font-size: 12px;
+  border-radius: 3px;
+  margin-left: -25px !important;
+  margin-top: 10px;
 }
 
 .remove-product:hover {
-    background-color: #a44;
+  background-color: #a44;
 }
 
 .totals .totals-item {
-    float: right;
-    clear: both;
-    width: 100%;
-    margin-bottom: 10px;
+  float: right;
+  clear: both;
+  width: 100%;
+  margin-left: px;  
 }
 
 .totals label {
-    float: left;
-    clear: both;
-    width: 79%;
-    text-align: right;
+  float: left;
+  clear: both;
+  width: 95%;
+  text-align: right;
 }
 
 .totals .totals-value {
-    float: right;
-    width: 21%;
-    text-align: right;
+  float: right;
+  width: 50%;
+  text-align: right;
+  margin-right: 15px;
 }
 
 .checkout {
-    display: flex;
-    justify-content: flex-end;
-    border: 0;
-    margin: 20px 10px 20px 79rem;
-    padding: 6px 25px;
-    background-color: #6b6;
-    color: #fff;
-    font-size: 25px;
-    border-radius: 3px;
+  display: flex;
+  justify-content: flex-end;
+  border: 0;
+  margin: 0 10px 15px 9.7rem;
+  padding: 3px 10px;
+  background-color: #6b6;
+  color: #fff;
+  font-size: 23px;
+  border-radius: 3px;
+  text-decoration: none;
 }
 
 .checkout:hover {
-    background-color: #494;
+  background-color: #494;
+  color: #fff;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 5px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.one {
+  margin-left: 10px;
+  grid-column: 1 / 8;
+  grid-row: 1;
+}
+
+.two {
+  margin-left: 30px;
+  grid-column: 8 / 10;
+  grid-row: 1;
+  background-color: rgb(236, 236, 236);
 }
 
 </style>
 <body>
-<h1>Shopping Cart</h1>
-
-<div class="shopping-cart">
-
-  <div class="column-labels">
-    <label class="product-image">Image</label>
-    <label class="product-details">Product</label>
-    <label class="product-price">Price</label>
-    <label class="product-quantity">Quantity</label>
-    <label class="product-removal">Remove</label>
-    <label class="product-line-price">Total</label>
-  </div>
-  {% for post in shopping_cart_list %}
-  <div class="product">
-    <div class="product-image">
-        <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
-    </div>
-    <div class="product-details">
-      <div class="product-title">{{ post.item }}</div>
-      <p class="product-description">{{ post.description }}</p>
-    </div>
-    <div class="product-price">{{ post.price }}</div>
-    <div class="product-quantity">
-      <input type="number" value="1" min="1">
-    </div>
-    <div class="product-removal">
-      <button class="remove-product">
-        Remove
-      </button>
-    </div>
-    <div class="product-line-price">{{ post.price }}</div>
-  </div>
-  {% empty %}
-    <div>
-        <h3>Your cart is empty</h3>
-    </div>
-  {% endfor %}
-
-  <div class="totals">
-    <div class="totals-item">
-      <label>Subtotal</label>
-      <div class="totals-value" id="cart-subtotal">71.97</div>
-    </div>
-    <div class="totals-item totals-item-total">
-      <label>Grand Total</label>
-      <div class="totals-value" id="cart-total">90.57</div>
+<div class="wrapper">
+  <div class="one">
+    <h1>Shopping Cart</h1>
+    <div class="shopping-cart">
+      <div class="column-labels">
+        <label class="product-image">Image</label>
+        <label class="product-details">Product</label>
+        <label class="product-removal">Remove</label>
+        <label class="product-price">Price</label>
+        <!-- <label class="product-quantity">Quantity</label> -->
+        <!-- <label class="product-line-price">Total</label> -->
+      </div>
+      {% for post in shopping_cart_list %}
+      <div class="product">
+        <div class="product-image">
+            <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
+        </div>
+        <div class="product-details">
+          <div class="product-title">{{ post.item }}</div>
+          <p class="product-description">{{ post.description }}</p>
+        </div>
+        <!-- <div class="product-quantity">
+          <input type="number" value="1" min="1">
+        </div> -->
+        <div class="product-removal">
+          <button class="remove-product">
+            Remove
+          </button>
+        </div>
+        <div class="product-price-detail">${{ post.price }}</div>
+        <!-- <div class="product-line-price">{{ post.price }}</div> -->
+      </div>
+      {% empty %}
+        <div>
+            <h3>Your cart is empty</h3>
+        </div>
+      {% endfor %}
     </div>
   </div>
-    <button class="checkout">Checkout</button>
+  <div class="two">
+    <div class="totals">
+      <div class="totals-item">
+        <label>Subtotal</label>
+        <div class="totals-value" id="cart-subtotal">90.7</div>
+      </div>
+      <div class="totals-item totals-item-total">
+        <label>Grand Total</label>
+        <div class="totals-value" id="cart-total">90.57</div>
+      </div>
+    </div>
+      <a href="{% url 'checkout' %}" class="checkout">Checkout</a>
+  </div>
 </div>
-
 </body>
+
 <script>
 var taxRate = 0.05;
 var shippingRate = 15.00; 
 var fadeTime = 300;
 
-
 /* Assign actions */
-$('.product-quantity input').change( function() {
-  updateQuantity(this);
-});
-
-$('.product-removal button').click( function() {
+let remove = document.querySelector('.product-removal button')
+remove.click( function() {
   removeItem(this);
 });
 
-
-/* Recalculate cart */
-function recalculateCart()
-{
-  var subtotal = 0;
-  
-  /* Sum up row totals */
-  $('.product').each(function () {
-    subtotal += parseFloat($(this).children('.product-line-price').text());
-  });
-  
-  /* Calculate totals */
-  var tax = subtotal * taxRate;
-  var shipping = (subtotal > 0 ? shippingRate : 0);
-  var total = subtotal + tax + shipping;
-  
-  /* Update totals display */
-  $('.totals-value').fadeOut(fadeTime, function() {
-    $('#cart-subtotal').html(subtotal.toFixed(2));
-    $('#cart-tax').html(tax.toFixed(2));
-    $('#cart-shipping').html(shipping.toFixed(2));
-    $('#cart-total').html(total.toFixed(2));
-    if(total == 0){
-      $('.checkout').fadeOut(fadeTime);
-    }else{
-      $('.checkout').fadeIn(fadeTime);
-    }
-    $('.totals-value').fadeIn(fadeTime);
-  });
-}
-
-
-/* Update quantity */
-function updateQuantity(quantityInput)
-{
-  /* Calculate line price */
-  var productRow = $(quantityInput).parent().parent();
-  var price = parseFloat(productRow.children('.product-price').text());
-  var quantity = $(quantityInput).val();
-  var linePrice = price * quantity;
-  
-  /* Update line price display and recalc cart totals */
-  productRow.children('.product-line-price').each(function () {
-    $(this).fadeOut(fadeTime, function() {
-      $(this).text(linePrice.toFixed(2));
-      recalculateCart();
-      $(this).fadeIn(fadeTime);
-    });
-  });  
-}
-
-
 /* Remove item from cart */
-function removeItem(removeButton)
-{
+function removeItem(removeButton) {
   /* Remove row from DOM and recalc cart total */
   var productRow = $(removeButton).parent().parent();
   productRow.slideUp(fadeTime, function() {
     productRow.remove();
-    recalculateCart();
   });
 }
 </script>
-<!-- <h1>Shopping Cart</h1>
-    <div class="card-deck">
-        {{ shopping_cart_list.count }}
-        {% for post in shopping_cart_list %}    
-            <div class="card" style="width: 18rem;">
-                <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
-                <div class="card-body">
-                    <h4 class="card-text"><b>{{ post.item }}</b></h4>
-                    <p class="card-text">${{ post.price }}</p>
-                    <p class="card-text"> {{ post.seller }} </p>
-                </div>
-            </div>
-        {% empty %}
-            <div>
-                <h3>Your cart is empty</h3>
-                
-            </div>
-        {% endfor %}
-    </div>
-{% endblock content %} -->
+
+{% endblock content %}
