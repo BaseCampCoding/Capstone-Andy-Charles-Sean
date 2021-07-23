@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     CartView, FavoritePostList, FavoriteView, HomeListView,
-    PantsListView, PostCreateView, PostDetailView, ShoesListView,
+    PantsListView, PostCreateView, PostDetailView, SearchListView, ShoesListView,
     ShoppingCartView, TopsListView, ReviewCreateView, CheckoutView,
     PaymentView, FemaleListView, MaleListView,  SuccessView,
     )
@@ -23,6 +23,6 @@ urlpatterns = [
     path('success/', SuccessView.as_view(),name = 'success'),
     path('male/', MaleListView.as_view(), name='male_list'),
     path('female/', FemaleListView.as_view(), name='female_list'),
-    
+    path('search/', SearchListView.as_view(), name='search'),
 ]
 
