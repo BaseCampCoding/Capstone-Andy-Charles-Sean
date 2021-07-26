@@ -5,8 +5,8 @@
 <div class="card-deck">
 
     {% for item in object_list %}
- 
-            {% if 'female' in item.MorF %}
+        <div class="card-deck">
+            {% if 'female' in item.gender %}
               <div class="card" style="width: 18rem;">
                 <a href="{% url 'post_detail' item.pk %}"><img class="card-img-top" src="{{ item.image.url }}" ></a>
                 <div class="card-body">

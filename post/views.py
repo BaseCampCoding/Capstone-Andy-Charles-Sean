@@ -17,8 +17,6 @@ import stripe
 from django.db.models import Q, QuerySet
 # Create your views here.
 
-
-
 class HomeListView(ListView):
     model = Post
     template_name = 'index.html'
@@ -35,7 +33,7 @@ class HomeListView(ListView):
 class PostCreateView(CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ['item', 'image', 'categories', 'MorF', 'price', 'description',]
+    fields = ['item', 'image', 'categories', 'gender', 'price', 'description',]
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
@@ -173,13 +171,13 @@ def CartView(request, pk):
     return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
 
 def ShoppingCartView(request, **kwargs):
-        user = request.user
-        shopping_cart_list = user.cart.all()
+    user = request.user
+    shopping_cart_list = user.cart.all()
 
-        context = {
-            "shopping_cart_list" : shopping_cart_list,
-        }
-        return render(request, "shopping_cart.html", context)
+    context = {
+        "shopping_cart_list" : shopping_cart_list,
+    }
+    return render(request, "shopping_cart.html", context)
 
 class ReviewCreateView(CreateView):
     model = Review
