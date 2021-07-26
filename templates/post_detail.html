@@ -136,12 +136,12 @@
       <div class="card-deck">
         {% for item in related_items %}
           <div class="card post-entry" style="width: 18rem;">
-            <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
-            <div class="container">
-              <h4><b>{{ item }}</b></h4>
-              <p>$ {{ item.price }}</p>
-              <p> {{ item.seller }}</p>
-            </div>
+              <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
+              <div class="container">
+                  <p><b>{{ item }}</b></p>
+                  <p>$ {{ item.price }}</p>
+                  <p> {{ item.seller }}</p>
+              </div>
           </div>
         {% endfor %}
       </div>

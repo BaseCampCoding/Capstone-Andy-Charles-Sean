@@ -29,16 +29,24 @@
     <ul class="navbar-nav" id="dropdown">
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Category
+            Men's
           </a>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-            <li><a class="dropdown-item" href="{% url 'tops_list' %}">Tops</a></li>
-            <li><a class="dropdown-item" href="{% url 'pants_list' %}">Pants</a></li>
-            <li><a class="dropdown-item" href="{% url 'shoes_list' %}">Shoes</a></li>
-            <li><a class="dropdown-item" href="{% url 'male_list' %}">Men's</a></li>
-            <li><a class="dropdown-item" href="{% url 'female_list' %}">Women's</a></li>
+            <li><a class="dropdown-item" href="/male/tops">Tops</a></li>
+            <li><a class="dropdown-item" href="/male/pants">Pants</a></li>
+            <li><a class="dropdown-item" href="/male/shoes">Shoes</a></li>
           </ul>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Women's
+        </a>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+          <li><a class="dropdown-item" href="/female/tops">Tops</a></li>
+          <li><a class="dropdown-item" href="/female/pants">Pants</a></li>
+          <li><a class="dropdown-item" href="/female/shoes">Shoes</a></li>
+        </ul>
+    </li>
     </ul>
     <form action="{% url 'search' %}" class="d-flex">
         <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -111,7 +119,7 @@
           <div class="card" style="width: 18rem;">
             <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
             <div class="card-body">
-              <h4 class="card-text"><b>{{ post.item }}</b></h4>
+              <p class="card-text"><b>{{ post.item }}</b></p>
               <p class="card-text">${{ post.price }}</p>
               <p class="card-text"> {{ post.seller }}</p>
             </div>

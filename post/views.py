@@ -209,6 +209,7 @@ class ReviewCreateView(CreateView):
 class MaleListView(ListView):
     model = Post
     template_name = 'Gender/male_list.html'
+    
 
 
 
@@ -228,3 +229,11 @@ class SearchListView(ListView):
         )
         return posts
     
+class FilterListView(ListView):
+    model = Post
+    template_name = 'filter.html'
+    def get_queryset(self):
+        gender = self.request.resolver_match.kwargs['gender']
+        category = self.request.resolver_match.kwargs['category']
+        posts = Post.objects.filter(MorF=gender, categories=category)
+        return posts
