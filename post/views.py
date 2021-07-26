@@ -1,3 +1,4 @@
+from django import template
 from django.db.models.fields import CommaSeparatedIntegerField
 from django.http import request
 from django.views.generic import ListView, CreateView
@@ -78,9 +79,11 @@ class ShoesListView(ListView):
 class SuccessView(TemplateView):
     template_name = 'success.html'
 
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 class CheckoutView(View):
-    def get(self, *args, **kwargs):
+    def get(self, *request, **kwargs):
         form = CheckoutForm()
         context = {
             'form' : form 
@@ -96,7 +99,18 @@ class CheckoutView(View):
             mode='payment',
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/cancel/'
-    )
+        )
+
+        template = render_to_string('email_template.html')
+        email = EmailMessage(
+            'Thanks for shopping at Shelf Wear',
+            template,
+            settings.EMAIL_HOST_USER,
+            ['scoh25@gmail.com'],
+        )
+        email.fail_silently=False
+        email.send()
+
         context = {
             'session_id': session.id,
             'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY
