@@ -221,5 +221,5 @@ class FilterListView(ListView):
     def get_queryset(self):
         gender = self.request.resolver_match.kwargs['gender']
         category = self.request.resolver_match.kwargs['category']
-        posts = Post.objects.filter(MorF=gender, categories=category)
+        posts = Post.objects.filter(gender=gender, categories=category)
         return posts
