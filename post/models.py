@@ -56,6 +56,8 @@ class Post(models.Model):
     @staticmethod
     def get_related_items(post: 'Post'):
         return Post.objects.filter(categories=post.categories, MorF=post.MorF).exclude(id=post.id)
+    
+    
         
 
 class Address(models.Model):
