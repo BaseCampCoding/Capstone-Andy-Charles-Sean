@@ -4,8 +4,8 @@
 <style>
 .product-image { float: left; width: 25%; margin-right: 20px; color:rgb(255, 255, 255)}
 .product-details { float: left; width: 44%; }
-.product-removal { float: left; width: 18%; text-align: center;}
-.product-price { float: left; width: 10%; text-align: center; margin-left: 10px !important;}
+.product-removal { float: left; width: 18%; text-align: center; color:rgb(255, 255, 255)}
+.product-price { float: left; width: 10%; text-align: center; margin-left: 10px !important; color:rgb(255, 255, 255)}
 .product-quantity { float: left; width: 1%; }
 .product-line-price { float: left; width: 1%; text-align: center; }
 
@@ -29,7 +29,7 @@
 /* Body/Header stuff */
 h1 {
   font-weight: 100;
-  margin-bottom: 1rem;
+  margin-bottom: -1rem;
 }
 
 label {
@@ -47,9 +47,18 @@ label {
 /* Product entries */
 .product {
   margin-bottom: 20px;  
-  border-top: .5px solid grey;
+  border-bottom: .5px solid grey;
   margin-right: -20px !important;
-  background-color: rgb(236, 236, 236);
+  background-color: rgb(243, 243, 243);
+  box-shadow: 10px 5px 5px rgb(112, 112, 112);
+}
+
+.product:hover {
+  box-shadow: 10px 5px 5px rgb(71, 71, 71);
+}
+
+.product-title {
+  font-size: 25px;
 }
 
 .product .product-image {
@@ -82,38 +91,30 @@ label {
   border-radius: 3px;
   margin-left: -25px !important;
   margin-top: 10px;
+  text-decoration: none;
 }
 
 .remove-product:hover {
   background-color: #a44;
 }
 
-.totals .totals-item {
-  float: right;
-  clear: both;
-  width: 100%;
-  margin-left: px;  
-}
-
 .totals label {
-  float: left;
-  clear: both;
-  width: 95%;
-  text-align: right;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 0 -1rem 10px;
 }
 
 .totals .totals-value {
-  float: right;
-  width: 50%;
-  text-align: right;
-  margin-right: 15px;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 10px 0 0;
 }
 
 .checkout {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   border: 0;
-  margin: 0 10px 15px 9.7rem;
+  margin: 20px 10px 15px 10px;
   padding: 3px 10px;
   background-color: #6b6;
   color: #fff;
@@ -137,14 +138,32 @@ label {
 .one {
   margin-left: 10px;
   grid-column: 1 / 8;
-  grid-row: 1;
+  grid-row: 1 / 4;
 }
 
 .two {
-  margin-left: 30px;
+  margin: 20px 10px 0 30px;
   grid-column: 8 / 10;
-  grid-row: 1;
+  grid-row: 1 / 3;
   background-color: rgb(236, 236, 236);
+  box-shadow: 10px 5px 5px rgb(112, 112, 112);
+}
+
+.two:hover {
+  box-shadow: 10px 5px 5px rgb(71, 71, 71);
+}
+
+h3 {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 400;
+  margin: 0 0 3px 30px;
+}
+
+.bar {
+  margin: 0 -1.2rem 1rem 0;
+  padding: .12rem 0;
+  background-color:rgb(219, 86, 24);
 }
 
 </style>
@@ -153,11 +172,13 @@ label {
   <div class="one">
     <h1>Shopping Cart</h1>
     <div class="shopping-cart">
+      <h3>{{ shopping_cart_list.count }} item</h3>
+      <div class="bar"></div>
       <div class="column-labels">
-        <label class="product-image">Image</label>
-        <label class="product-details">Product</label>
-        <label class="product-removal">Remove</label>
-        <label class="product-price">Price</label>
+        <label class="product-image"></label>
+        <label class="product-details"></label>
+        <label class="product-removal"></label>
+        <label class="product-price"></label>
         <!-- <label class="product-quantity">Quantity</label> -->
         <!-- <label class="product-line-price">Total</label> -->
       </div>
@@ -174,9 +195,9 @@ label {
           <input type="number" value="1" min="1">
         </div> -->
         <div class="product-removal">
-          <button class="remove-product">
+          <a class="remove-product" href="{% url 'favorite_post' post.pk %}">
             Remove
-          </button>
+          </a>
         </div>
         <div class="product-price-detail">${{ post.price }}</div>
         <!-- <div class="product-line-price">{{ post.price }}</div> -->
@@ -192,7 +213,7 @@ label {
     <div class="totals">
       <div class="totals-item">
         <label>Subtotal</label>
-        <div class="totals-value" id="cart-subtotal">90.7</div>
+        <div class="totals-value" id="cart-subtotal">90.57</div>
       </div>
       <div class="totals-item totals-item-total">
         <label>Grand Total</label>

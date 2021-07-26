@@ -28,17 +28,17 @@ Charles - cards for the clothes, admin access
 
 We will be working on the detail page for each clothing item with a short description of the item, price, and review. We are going to put in a buyer role and seller role to either buy clothes or post clothes to sell. We will also let the user be redirected to the different categories of clothes thats on the navbar.
 
-Andy - redirecting to different pages  
-Sean - buyer role and seller role  
-Charles - detail page for each item  
+Andy - redirecting to different pages
+Sean - buyer role and seller role
+Charles - detail page for each item
 
 #### Week 3
 
 we will implement the cart where users can add items and keep browsing until they are ready to pay. When the user is ready to pay they will be sent to the transaction page where they will be shown all of their items and prices and reviews. The user will get an email of their receipt once a purchase has been made.
 
-Andy - Transactiong Page  
-Sean - Email  
-Charles - Shopping cart   
+Andy - Transactiong Page
+Sean - Email and Shopping cart
+Charles - Style cards on categories and homepage  
 
 
 #### Week 4
