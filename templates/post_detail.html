@@ -83,15 +83,16 @@
     color: white;
   }
 </style>
+{% if user.is_authenticated %}
   <div class="wrapper">
     <div class="one">
-      <img class="float-left" src="{{ post.image.url }}" style="width:100%">
+      <img class="float-left" src="{{ post.image.url }}" style="width:100%; height: auto;">
     </div>
     <div class="two">
       <h2 class="float-right">{{ post.item }}</h2>
-      <h3>{{ post.categories }}</h3>
+      
       <p>${{ post.price }}</p>
-      <p>Seller: <span>{{ post.seller }}</span></p>
+      <p class="font-weight-bold">Seller: <span >{{ post.seller }}</span></p>
       <hr>
       <ul>
         <li class="card-text">{{ post.description }}</li>
@@ -99,11 +100,11 @@
     </div>
     <div class="cart">
       {% if cart %}
-        <a class="remove-cart" href="{% url 'shopping' object.pk %}">
+        <a class="remove-cart" href="{% url 'shopping' object.pk %}" style="float: right;">
           Remove
         </a>
       {% else %}
-        <a class="add-cart" href="{% url 'shopping' object.pk %}">
+        <a class="add-cart" href="{% url 'shopping' object.pk %}" style="float: right; padding-right: 5%;">
           Add to Cart
         </a>
       {% endif %}
@@ -132,11 +133,11 @@
     </div>
     <br>
     <div class="three">
-      <h3>Related Items</h3>
+      <h3 style="text-align: center;">Related Items</h3>
       <div class="card-deck">
         {% for item in related_items %}
           <div class="card post-entry" style="width: 18rem;">
-              <a href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
+              <a class="messUp" href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
               <div class="container">
                   <p><b>{{ item }}</b></p>
                   <p>$ {{ item.price }}</p>
@@ -146,4 +147,49 @@
         {% endfor %}
       </div>
     </div>
+{% else %}
+<div class="wrapper">
+    <div class="one">
+      <img class="float-left" src="{{ post.image.url }}" style="width:100%; height: auto;">
+    </div>
+    <div class="two">
+      <h2 class="float-right">{{ post.item }}</h2>
+      
+      <p>${{ post.price }}</p>
+      <p class="font-weight-bold">Seller: <span >{{ post.seller }}</span></p>
+      <hr>
+      <ul>
+        <li class="card-text">{{ post.description }}</li>
+      </ul>
+    </div>
+    
+    
+    <div class="card-footer review">
+        <p>Please Log in to leave a review</p>
+      {% for review in post.reviews.all %}
+        <p>
+            <span class="font-weight-bold">
+                {{ review.author }} &middot;
+            </span>
+            {{ review }}
+        </p>
+      {% endfor %}
+    </div>
+    <br>
+    <div class="three">
+      <h3 style="text-align: center;">Related Items</h3>
+      <div class="card-deck">
+        {% for item in related_items %}
+          <div class="card post-entry" style="width: 18rem;">
+              <a class="messUp" href="{% url 'post_detail' item.pk %}"><img src="{{ item.image.url }}" style="width:100%"></a>
+              <div class="container">
+                  <p><b>{{ item }}</b></p>
+                  <p>$ {{ item.price }}</p>
+                  <p> {{ item.seller }}</p>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endif %}
 {% endblock content %}
