@@ -13,17 +13,17 @@
             <div class="row">
                 <h1>Login</h1>
                 <div class="form-control">
-                    {{ form.username }}
-                    {{ form.username.errors }}
-                    <span class="toggle">
+                  {{ form.username }}
+                  {{ form.username.errors }}
+                  <span class="toggle">
                     <i class="fas fa-user"></i>
-                    </span>
+                  </span>
                 </div>
                 <div class="form-control">
                     {{ form.password }}
                     {{ form.password.errors }}
                     <span class="toggle" onclick="show$hide()">
-                        <i class="fas fa-eye"></i>
+                      <i class="fas fa-eye"></i>
                     </span>
                 </div>
                 <button class="btn" type="submit">
@@ -114,12 +114,11 @@ body {
 
 <script>
 const form_input = document.getElementsByTagName("input")
-form_input[1].placeholder = "Username"
-form_input[2].placeholder = "Password"
-form_input[2].id = "password"
-form_input[2].type = "password"
+form_input[2].placeholder = "Username"
+form_input[3].placeholder = "Password"
+form_input[3].id = "password"
+form_input[3].type = "password"
 function show$hide() {
-  let toggle = document.getElementsByClassName("toggle")[0];
   let password = document.querySelector("#password");
 
   if (password.getAttribute("type") == "password") {
