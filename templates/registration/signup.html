@@ -6,50 +6,50 @@
 <body>
     <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-            <div class="wrapper">
-                <div class="row">
-                    <h1>Sign Up</h1>
-                    <div class="form-control">
-                        {{ form.username }}
-                        <span class="toggle">
-                        <i class="fas fa-user"></i>
-                        </span>
-                    </div>
-                    <div class="form-control">
-                        {{ form.first_name }}
-                        <span class="toggle">
-                            <i class="fas fa-user"></i>
-                        </span>
-                    </div>
-                    <div class="form-control">
-                        {{ form.last_name }}
-                        <span class="toggle">
-                            <i class="fas fa-user"></i>
-                        </span>
-                    </div>
-                    <div class="form-control">
-                        {{ form.roles }}
-                    </div>
-                    <div class="form-control">
-                        {{ form.email }}
-                        <span class="toggle">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                    </div>
-                    <div class="form-control">
-                        {{ form.password1 }}
-                        <span class="toggle" onclick="show$hide()">
-                            <i class="fas fa-eye"></i>
-                        </span>
-                    </div>
-                    <div class="form-control">
-                        {{ form.password2 }}
-                    </div>
-                    <button class="btn" type="submit">
-                        Sign Up
-                    </button>
+        <div class="wrapper">
+            <div class="row">
+                <h1>Sign Up</h1>
+                <div class="form-control">
+                    {{ form.username }}
+                    <span class="toggle">
+                    <i class="fas fa-user-circle"></i>
+                    </span>
                 </div>
+                <div class="form-control">
+                    {{ form.first_name }}
+                    <span class="toggle">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+                <div class="form-control">
+                    {{ form.last_name }}
+                    <span class="toggle">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+                <div class="form-control">
+                    {{ form.roles }}
+                </div>
+                <div class="form-control">
+                    {{ form.email }}
+                    <span class="toggle">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+                <div class="form-control">
+                    {{ form.password1 }}
+                    <span class="toggle" onclick="show$hide()">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="form-control">
+                    {{ form.password2 }}
+                </div>
+                <button class="btn" type="submit">
+                    Sign Up
+                </button>
             </div>
+        </div>
     </form>
 </body>
 
@@ -69,7 +69,7 @@ body {
     top: 50%;
     left: 50%;
     border-radius: 7px;
-    margin-top: 70px;
+    margin-top: 100px;
 }
 
 .wrapper .row {
@@ -92,9 +92,9 @@ body {
     padding-right: 10px !important;
 }
 
-/* #first_name, #last_name {
+#first_name, #last_name {
     padding-right: 5px !important;
-} */
+}
 
 .wrapper input {
     width: 100%;
@@ -105,6 +105,16 @@ body {
     margin-bottom: 20px;
     border-radius: 7px;
     background-color: #f1f2f6;
+    font-size: 16px;
+}
+
+.wrapper select {
+    width: 100%;
+    padding: 0 40px 0 20px;
+    height: 40px;
+    border: none;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
     font-size: 16px;
 }
 
@@ -130,12 +140,6 @@ body {
     color: #fff;
     background: #0f6efd;
     cursor: pointer;
-}
-
-.wrapper .redirect {
-    color: rgb(28, 126, 184);
-    cursor:pointer;
-    text-decoration: none;
 }
 </style>
 
