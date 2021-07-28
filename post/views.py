@@ -16,6 +16,8 @@ from .forms import CheckoutForm, ReviewForm
 from django.conf import settings
 import stripe
 from django.db.models import Q, QuerySet
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 # Create your views here.
 
 class HomeListView(ListView):
@@ -78,9 +80,6 @@ class ShoesListView(ListView):
 
 class SuccessView(TemplateView):
     template_name = 'success.html'
-
-from django.core.mail import EmailMessage
-from django.template.loader import render_to_string
 
 class CheckoutView(View):
     def get(self, *request, **kwargs):
