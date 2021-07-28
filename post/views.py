@@ -1,35 +1,17 @@
-import math
-from django.http import request
+from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView, CreateView
 from django.core.exceptions import ObjectDoesNotExist
-from django import template
-from django.db.models.fields import CommaSeparatedIntegerField
-from django.http import request
-from django.views.generic import ListView, CreateView
-from django.core.exceptions import ObjectDoesNotExist
-from django.views.generic.base import TemplateView
-from .forms import CheckoutForm
 from django.shortcuts import render , redirect, get_object_or_404
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
-from django.urls.base import reverse
 from django.contrib import messages
-from .forms import CheckoutForm
-from django.conf import settings
 import stripe
-from django.conf import settings
-from django.http import JsonResponse
 from django.views import View
-from django.core import serializers
-import json
-
 from django.urls.base import reverse, reverse_lazy
-from django.contrib import messages
 from .forms import CheckoutForm, ReviewForm
-from django.conf import settings
-import stripe
 from django.db.models import Q, QuerySet
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
@@ -129,12 +111,12 @@ class CheckoutView(View):
             cancel_url=YOUR_DOMAIN + '/cancel/'
         )
 
-        template = render_to_string('email_template.html')
+        template = render_to_string('email_template.html', {'name':request.user.username})
         email = EmailMessage(
             'Thanks for shopping at Shelf Wear',
             template,
             settings.EMAIL_HOST_USER,
-            ['scoh25@gmail.com'],
+            [request.user.email, 'freetrailac1@gmail.com'],
         )
         email.fail_silently=False
         email.send()
@@ -219,11 +201,22 @@ def CartView(request, pk):
 def ShoppingCartView(request, **kwargs):
     user = request.user
     shopping_cart_list = user.cart.all()
+    total = 0
+    for i in shopping_cart_list:
+        total += i.price
 
     context = {
+        "total_cost" : total,
         "shopping_cart_list" : shopping_cart_list,
     }
     return render(request, "shopping_cart.html", context)
+
+# Testing remove items from cart
+def remove(request):
+    product = Post.objects.get(id=request.GET.get('pk'))
+    shopping_cart_list = request.user.cart.all()
+    shopping_cart_list.remove(product)
+    return redirect('shopping_cart')
 
 class ReviewCreateView(CreateView):
     model = Review

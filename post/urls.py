@@ -1,12 +1,9 @@
 from django.urls import path
 from .views import (
-    FavoritePostList, FavoriteView, HomeListView, PantsListView, PostCreateView, PostDetailView, ShoesListView, SuccessView, TopsListView, ReviewCreateView, CheckoutView, PaymentView,
-    CartView, HomeListView,
-    PantsListView, PostCreateView, PostDetailView, ShoesListView,
     CartView, FavoritePostList, FavoriteView, HomeListView,
     PantsListView, PostCreateView, PostDetailView, SearchListView, ShoesListView,
     ShoppingCartView, TopsListView, ReviewCreateView, CheckoutView,
-    PaymentView, FemaleListView, MaleListView,  SuccessView, FilterListView
+    PaymentView, FemaleListView, MaleListView,  SuccessView, FilterListView, remove
     )
 
 urlpatterns = [
