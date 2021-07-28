@@ -3,8 +3,10 @@ from .views import (
     FavoritePostList, FavoriteView, HomeListView, PantsListView, PostCreateView, PostDetailView, ShoesListView, SuccessView, TopsListView, ReviewCreateView, CheckoutView, PaymentView,
     CartView, HomeListView,
     PantsListView, PostCreateView, PostDetailView, ShoesListView,
+    CartView, FavoritePostList, FavoriteView, HomeListView,
+    PantsListView, PostCreateView, PostDetailView, SearchListView, ShoesListView,
     ShoppingCartView, TopsListView, ReviewCreateView, CheckoutView,
-    PaymentView, FemaleListView, MaleListView,
+    PaymentView, FemaleListView, MaleListView,  SuccessView, FilterListView
     )
 
 urlpatterns = [
@@ -20,10 +22,11 @@ urlpatterns = [
     path('payment/', PaymentView.as_view(), name='payment'),
     path('favorite/<int:pk>/', FavoriteView, name="favorite_post"),
     path('favorite_post/', FavoritePostList, name="post_favorite_list"),
-    path('review/new/', ReviewCreateView.as_view(), name='review_new'),
+    path('post/<int:pk>/review', ReviewCreateView.as_view(), name='review_new'),
     path('success/', SuccessView.as_view(),name = 'success'),
     path('male/', MaleListView.as_view(), name='male_list'),
-    path('female', FemaleListView.as_view(), name='female_list'),
-    
+    path('female/', FemaleListView.as_view(), name='female_list'),
+    path('search/', SearchListView.as_view(), name='search'),
+    path('<gender>/<category>/', FilterListView.as_view(), name='filter'),
 ]
 

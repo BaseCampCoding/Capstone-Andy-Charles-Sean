@@ -30,7 +30,7 @@ class UserAccountSellingView(DetailView):
 class UserAccountEdit(UpdateView):
     model = CustomUser
     template_name = 'user_account_edit.html'
-    fields = ['username', 'first_name', 'last_name', 'roles']
+    fields = ['username', 'first_name', 'last_name', 'email']
 
     def form_valid(self, form):
         form.instance.seller = self.request.user

@@ -1,23 +1,246 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<h1>Shopping Cart</h1>
-    <div class="card-deck">
-        {{ shopping_cart_list.count }}
-        {% for post in shopping_cart_list %}    
-            <div class="card" style="width: 18rem;">
-                <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
-                <div class="card-body">
-                    <h4 class="card-text"><b>{{ post.item }}</b></h4>
-                    <p class="card-text">${{ post.price }}</p>
-                    <p class="card-text"> {{ post.seller }} </p>
-                </div>
-            </div>
-        {% empty %}
-            <div>
-                <h3>Your cart is empty</h3>
-                
-            </div>
-        {% endfor %}
+<style>
+.product-image { float: left; width: 25%; margin-right: 20px; color:rgb(255, 255, 255)}
+.product-details { float: left; width: 44%; }
+.product-removal { float: left; width: 18%; text-align: center; color:rgb(255, 255, 255)}
+.product-price { float: left; width: 10%; text-align: center; margin-left: 10px !important; color:rgb(255, 255, 255)}
+.product-quantity { float: left; width: 1%; }
+.product-line-price { float: left; width: 1%; text-align: center; }
+
+
+/* This is used as the traditional .clearfix class */
+.group:before,
+.group:after {
+    content: '';
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+/* Apply dollar signs */
+.product .product-price:before, .product .product-line-price:before, .totals-value:before {
+  content: '$';
+}
+
+/* Body/Header stuff */
+h1 {
+  font-weight: 100;
+  margin-bottom: -1rem;
+}
+
+label {
+  color: #aaa;
+  margin-right: 1px;
+}
+
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  margin-top: -32px;
+}
+
+
+/* Product entries */
+.product {
+  margin-bottom: 20px;  
+  border-bottom: .5px solid grey;
+  margin-right: -20px !important;
+  background-color: rgb(243, 243, 243);
+  box-shadow: 10px 5px 5px rgb(112, 112, 112);
+}
+
+.product:hover {
+  box-shadow: 10px 5px 5px rgb(71, 71, 71);
+}
+
+.product-title {
+  font-size: 25px;
+}
+
+.product .product-image {
+  text-align: center;
+}
+
+.product-details .product-description {
+  margin: 5px 20px 5px 0;
+  line-height: 1.4em;
+}
+
+.product-price-detail {
+  float: left; width: 10%;
+  text-align: center;
+  font-weight: bolder;
+  margin-top: 10px;
+}
+
+.product-quantity input {
+    width: 40px;
+}
+
+.remove-product {
+  border: 0;
+  padding: 4px 8px;
+  background-color: #c66;
+  color: #fff;
+  font-family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
+  font-size: 12px;
+  border-radius: 3px;
+  margin-left: -25px !important;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.remove-product:hover {
+  background-color: #a44;
+}
+
+.totals label {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0 0 -1rem 10px;
+}
+
+.totals .totals-value {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 10px 0 0;
+}
+
+.checkout {
+  display: flex;
+  justify-content: center;
+  border: 0;
+  margin: 20px 10px 15px 10px;
+  padding: 3px 10px;
+  background-color: #6b6;
+  color: #fff;
+  font-size: 23px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.checkout:hover {
+  background-color: #494;
+  color: #fff;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 5px;
+  grid-auto-rows: minmax(100px, auto);
+}
+
+.one {
+  margin-left: 10px;
+  grid-column: 1 / 8;
+  grid-row: 1 / 4;
+}
+
+.two {
+  margin: 20px 10px 0 30px;
+  grid-column: 8 / 10;
+  grid-row: 1 / 3;
+  background-color: rgb(236, 236, 236);
+  box-shadow: 10px 5px 5px rgb(112, 112, 112);
+}
+
+.two:hover {
+  box-shadow: 10px 5px 5px rgb(71, 71, 71);
+}
+
+h3 {
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 400;
+  margin: 0 0 3px 30px;
+}
+
+.bar {
+  margin: 0 -1.2rem 1rem 0;
+  padding: .12rem 0;
+  background-color:rgb(219, 86, 24);
+}
+
+</style>
+<body>
+<div class="wrapper">
+  <div class="one">
+    <h1>Shopping Cart</h1>
+    <div class="shopping-cart">
+      <h3>{{ shopping_cart_list.count }} item</h3>
+      <div class="bar"></div>
+      <div class="column-labels">
+        <label class="product-image"></label>
+        <label class="product-details"></label>
+        <label class="product-removal"></label>
+        <label class="product-price"></label>
+        <!-- <label class="product-quantity">Quantity</label> -->
+        <!-- <label class="product-line-price">Total</label> -->
+      </div>
+      {% for post in shopping_cart_list %}
+      <div class="product">
+        <div class="product-image">
+            <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
+        </div>
+        <div class="product-details">
+          <div class="product-title">{{ post.item }}</div>
+          <p class="product-description">{{ post.description }}</p>
+        </div>
+        <!-- <div class="product-quantity">
+          <input type="number" value="1" min="1">
+        </div> -->
+        <div class="product-removal">
+          <a class="remove-product" href="{% url 'favorite_post' post.pk %}">
+            Remove
+          </a>
+        </div>
+        <div class="product-price-detail">${{ post.price }}</div>
+        <!-- <div class="product-line-price">{{ post.price }}</div> -->
+      </div>
+      {% empty %}
+        <div>
+            <h3>Your cart is empty</h3>
+        </div>
+      {% endfor %}
     </div>
+  </div>
+  <div class="two">
+    <div class="totals">
+      <div class="totals-item">
+        <label>Subtotal</label>
+        <div class="totals-value" id="cart-subtotal">90.57</div>
+      </div>
+      <div class="totals-item totals-item-total">
+        <label>Grand Total</label>
+        <div class="totals-value" id="cart-total">90.57</div>
+      </div>
+    </div>
+      <a href="{% url 'checkout' %}" class="checkout">Checkout</a>
+  </div>
+</div>
+</body>
+
+<script>
+const fadeTime = 300;
+
+/* Assign actions */
+let remove = document.querySelector('.product-removal button')
+remove.click( function() {
+  removeItem(this);
+});
+
+/* Remove item from cart */
+function removeItem(removeButton) {
+  var productRow = $(removeButton).parent().parent();
+  productRow.slideUp(fadeTime, function() {
+    productRow.remove();
+  });
+}
+</script>
+
 {% endblock content %}
