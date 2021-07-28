@@ -123,9 +123,12 @@ def checkout(request):
         YOUR_DOMAIN = "http://127.0.0.1:8000"
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
+            
             line_items=cart_items,
+
            
             mode='payment',
+            
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/cancel/'
         )
@@ -135,7 +138,7 @@ def checkout(request):
             'Thanks for shopping at Shelf Wear',
             template,
             settings.EMAIL_HOST_USER,
-            ['scoh25@gmail.com'],
+            [request.user.email, 'freetrailac1@gmail.com'],
         )
         email.fail_silently=False
         email.send()
