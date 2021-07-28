@@ -29,6 +29,9 @@
                 </div>
                 <div class="form-control">
                     {{ form.roles }}
+                    <span class="toggle">
+                        <i class="fas fa-arrow-down"></i>
+                    </span>
                 </div>
                 <div class="form-control">
                     {{ form.email }}
@@ -109,13 +112,18 @@ body {
 }
 
 .wrapper select {
+	background-color: #fff;
     width: 100%;
+    -moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
     padding: 0 40px 0 20px;
-    height: 40px;
+    height: 50px;
     border: none;
     margin-bottom: 20px;
-    background-color: #f5f5f5;
+    background-color:  #f1f2f6  ;
     font-size: 16px;
+    box-shadow:none;
 }
 
 .wrapper .toggle {
@@ -145,18 +153,18 @@ body {
 
 <script>
     const form_input = document.getElementsByTagName("input")
-    form_input[1].placeholder = "Username"
-    form_input[2].placeholder = "First Name"
-    form_input[2].id = "first_name"
-    form_input[3].placeholder = "Last Name"
-    form_input[3].id = "last_name"
-    form_input[4].placeholder = "Email"
-    form_input[5].placeholder = "Password"
-    form_input[5].id = "password"
-    form_input[5].type = "password"
-    form_input[6].placeholder = "Re-enter password"
-    form_input[6].id = "password2"
+    form_input[2].placeholder = "Username"
+    form_input[3].placeholder = "First Name"
+    form_input[3].id = "first_name"
+    form_input[4].placeholder = "Last Name"
+    form_input[4].id = "last_name"
+    form_input[5].placeholder = "Email"
+    form_input[6].placeholder = "Password"
+    form_input[6].id = "password"
     form_input[6].type = "password"
+    form_input[7].placeholder = "Re-enter password"
+    form_input[7].id = "password2"
+    form_input[7].type = "password"
 
     function show$hide() {
       let password = document.querySelector("#password");
