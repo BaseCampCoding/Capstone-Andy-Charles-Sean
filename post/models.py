@@ -4,8 +4,9 @@ from django.contrib.auth import get_user_model
 from django.db.models.aggregates import Max
 from django.urls import reverse
 from django.conf import settings
-from django_countries.fields import CountryField
 from django.urls import reverse, reverse_lazy
+from django_countries.fields import CountryField
+
 
 # Create your models here.
 
@@ -27,7 +28,7 @@ class Post(models.Model):
     ]
     
     image = models.ImageField(null=True, upload_to=None, height_field=None, width_field=None, max_length=100, )
-    item  = models.CharField(max_length=64)
+    item  = models.CharField(max_length=32)
     categories = models.CharField(max_length=5, choices=CATEGORIES, default="Tops")
     gender = models.CharField(max_length=6, choices=MORF, default="Male")
     seller = models.ForeignKey(
@@ -65,7 +66,7 @@ class Address(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)
-    country = CountryField(multiple=False)
+    country = CountryField(multiple=True)
     zip = models.CharField(max_length=100)
     address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
     default = models.BooleanField(default=False)

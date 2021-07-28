@@ -15,6 +15,8 @@ from .forms import CheckoutForm, ReviewForm
 from django.db.models import Q, QuerySet
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+
+
 # Create your views here.
 
 class HomeListView(ListView):
@@ -80,9 +82,8 @@ class SuccessView(TemplateView):
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
-class CheckoutView(View):
-    def get(self,request, *args, **kwargs):
-        product = Post.objects.get(id=1)
+
+def checkout(request):
         user = request.user
         shopping_cart_list = user.cart.all()
         cart_items = [] 
@@ -126,40 +127,8 @@ class CheckoutView(View):
             'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY
         }
          
-        return render(self.request, "checkout.html", context)
+        return render(request, "checkout.html", context)
 
-
-
-    def post(self,request, *args, **kwargs):
-        form = CheckoutForm(self.request.POST)
-        try:
-            order = Post.objects.get_queryset()
-            if form.is_valid():
-                street_address = form.cleaned_data.get('address')
-                apartment_address = form.cleaned_data.get('address2')
-                country = form.cleaned_data.get('country')
-                zip = form.cleaned_data.get('zip')
-                same_shipping_address = form.cleaned_data.get('same_shipping_address')
-                save_info = form.cleaned_data.get('save_info')
-                payment_option = form.cleaned_data.get('payment_option')
-                billing_address = Address(   
-                    user = self.request.user,
-                    street_address = street_address,
-                    apartment_address = apartment_address,
-                    country =country,
-                    zip = zip,
-                    address_type ='B'
-                )
-                billing_address.save()
-                # order.billing_address = billing_address
-                # order.save()
-
-                
-                return redirect(self.request, 'checkout')
-        except ObjectDoesNotExist:
-                
-                messages.error(self.request, 'you do not have an active order')
-                return redirect("summary")
 
 class PaymentView(View):
     def get(self, *args,**kwargs):

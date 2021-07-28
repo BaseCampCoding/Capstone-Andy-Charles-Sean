@@ -1,10 +1,11 @@
 from django.urls import path
 from .views import (
-    CartView, FavoritePostList, FavoriteView, HomeListView,
-    PantsListView, PostCreateView, PostDetailView, SearchListView, ShoesListView,
-    ShoppingCartView, TopsListView, ReviewCreateView, CheckoutView,
-    PaymentView, FemaleListView, MaleListView,  SuccessView, FilterListView, remove
+    CartView, FavoritePostList, FavoriteView, HomeListView, PantsListView, 
+    PostCreateView, PostDetailView, SearchListView, ShoesListView,
+    ShoppingCartView, TopsListView, ReviewCreateView, PaymentView, 
+    FemaleListView, MaleListView,  SuccessView, FilterListView, checkout
     )
+
 
 urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name="post_new"),
@@ -15,7 +16,7 @@ urlpatterns = [
     path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('shopping/<int:pk>/', CartView, name='shopping'),
     path('shopping_cart/', ShoppingCartView, name='shopping_cart'),
-    path('checkout/', CheckoutView.as_view(), name='checkout'),
+    path('checkout/', checkout, name='checkout'),
     path('payment/', PaymentView.as_view(), name='payment'),
     path('favorite/<int:pk>/', FavoriteView, name="favorite_post"),
     path('favorite_post/', FavoritePostList, name="post_favorite_list"),
@@ -25,5 +26,6 @@ urlpatterns = [
     path('female/', FemaleListView.as_view(), name='female_list'),
     path('search/', SearchListView.as_view(), name='search'),
     path('<gender>/<category>/', FilterListView.as_view(), name='filter'),
+ 
 ]
 
