@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.conf import settings
 from django_countries.fields import CountryField
 from django.urls import reverse, reverse_lazy
+
 # Create your models here.
 
 ADDRESS_CHOICES = (
