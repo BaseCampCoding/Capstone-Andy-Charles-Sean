@@ -8,7 +8,7 @@ from django_countries.fields import CountryField
 class CheckoutForm(forms.Form):
     address =forms.CharField(required=False)
     address2 = forms.CharField(required=False)
-    country = CountryField(blank_label = 'select country').formfield(required=False, attrs={
+    country = CountryField(blank_label = '(select country)').formfield(attrs={
         
         'class': 'custom-select d-block w-100',
         

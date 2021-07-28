@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.conf import settings
 from django_countries.fields import CountryField
 from django.urls import reverse, reverse_lazy
+
 # Create your models here.
 
 ADDRESS_CHOICES = (
@@ -36,7 +37,7 @@ class Post(models.Model):
     price = models.DecimalField(max_digits=9, decimal_places=2)
     favorite =  models.ManyToManyField(CustomUser, related_name='favorite', blank=True)
     cart = models.ManyToManyField(CustomUser, related_name='cart', blank=True)
-    description = models.TextField(max_length=200, default="Description")
+    description = models.TextField(max_length=200)
   
     def __str__(self):
         return self.item

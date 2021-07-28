@@ -226,9 +226,7 @@ h3 {
 </body>
 
 <script>
-var taxRate = 0.05;
-var shippingRate = 15.00; 
-var fadeTime = 300;
+const fadeTime = 300;
 
 /* Assign actions */
 let remove = document.querySelector('.product-removal button')
@@ -238,7 +236,6 @@ remove.click( function() {
 
 /* Remove item from cart */
 function removeItem(removeButton) {
-  /* Remove row from DOM and recalc cart total */
   var productRow = $(removeButton).parent().parent();
   productRow.slideUp(fadeTime, function() {
     productRow.remove();

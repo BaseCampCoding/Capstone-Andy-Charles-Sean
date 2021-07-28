@@ -55,13 +55,13 @@
   </div>
   <ul class="navbar-nav" id="dropdown">
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-right: 12px !important;">
-          {{ user.username }}
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-          <li><a class="dropdown-item" href="{% url 'user_account' user.pk %}"><i class="fas fa-user-circle"></i>&nbsp; Account</a></li>
-          <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp; Log Out</a></li>
-        </ul>
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-right: 15px !important;">
+        {{ user.username }}
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+        <li><a class="dropdown-item" href="{% url 'user_account' user.pk %}"><i class="fas fa-user-circle"></i>&nbsp; Account</a></li>
+        <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp; Log Out</a></li>
+      </ul>
     </li>
   </ul>
   <div>
@@ -73,25 +73,25 @@
           <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
         </div>
         <ul class="navbar-nav" id="dropdown">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Men's
-                </a>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li><a class="dropdown-item" href="/male/tops">Tops</a></li>
-                  <li><a class="dropdown-item" href="/male/pants">Pants</a></li>
-                  <li><a class="dropdown-item" href="/male/shoes">Shoes</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
+          <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Women's
+                Men's
               </a>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item" href="/female/tops">Tops</a></li>
-                <li><a class="dropdown-item" href="/female/pants">Pants</a></li>
-                <li><a class="dropdown-item" href="/female/shoes">Shoes</a></li>
+                <li><a class="dropdown-item" href="/male/tops">Tops</a></li>
+                <li><a class="dropdown-item" href="/male/pants">Pants</a></li>
+                <li><a class="dropdown-item" href="/male/shoes">Shoes</a></li>
               </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Women's
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="/female/tops">Tops</a></li>
+              <li><a class="dropdown-item" href="/female/pants">Pants</a></li>
+              <li><a class="dropdown-item" href="/female/shoes">Shoes</a></li>
+            </ul>
           </li>
         </ul>
         <form action="{% url 'search' %}" class="d-flex">
