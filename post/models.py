@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.conf import settings
 from django_countries.fields import CountryField
 from django.urls import reverse, reverse_lazy
+
 # Create your models here.
 
 ADDRESS_CHOICES = (
@@ -22,7 +23,7 @@ class Post(models.Model):
 
     MORF= [
         ('male', "Male"),
-        ('female', 'Female')
+        ('female', 'Female')    
     ]
     
     image = models.ImageField(null=True, upload_to=None, height_field=None, width_field=None, max_length=100, )

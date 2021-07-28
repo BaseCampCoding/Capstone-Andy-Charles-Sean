@@ -1,30 +1,23 @@
+import math
 from django.http import request
 from django.views.generic import ListView, CreateView
 from django.core.exceptions import ObjectDoesNotExist
-<<<<<<< HEAD
-from django.shortcuts import render , redirect
-from django.views.generic.base import TemplateView
-from .forms import CheckoutForm
-=======
 from django.shortcuts import render , redirect, get_object_or_404
-from django.views.generic.base import View
+from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
->>>>>>> 409b45acaa945fedda051c121b4beebcddab4fec
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse
-<<<<<<< HEAD
-from django.views.generic.detail import DetailView
-from django.shortcuts import render, get_object_or_404
-from django.conf import settings
-
-
-
-import stripe
-=======
 from django.contrib import messages
 from .forms import CheckoutForm
->>>>>>> 409b45acaa945fedda051c121b4beebcddab4fec
+from django.conf import settings
+import stripe
+from django.conf import settings
+from django.http import JsonResponse
+from django.views import View
+from django.core import serializers
+import json
+
 # Create your views here.
 
 
@@ -89,35 +82,52 @@ class ShoesListView(ListView):
 class SuccessView(TemplateView):
     template_name = 'success.html'
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class CheckoutView(View):
-    def get(self, *args, **kwargs):
-        form = CheckoutForm()
-        context = {
-            'form' : form 
-        }
+    def get(self,request, *args, **kwargs):
+        product = Post.objects.get(id=1)
+        user = request.user
+        shopping_cart_list = user.cart.all()
+        cart_items = [] 
+        for i in shopping_cart_list:
+            data = {
+                    'price_data': {
+                        'currency': 'usd',
+                        'unit_amount': round(i.price * 100),
+                        'product_data': {
+                            'name': i
+                        },
+                    },
+                    'quantity': 1,
+                }
+            cart_items.append(data)
+            
+
         stripe.api_key = settings.STRIPE_SECRET_KEY
         YOUR_DOMAIN = "http://127.0.0.1:8000"
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
-            line_items=[{
-                'price': 'price_1JFmozHSf7eLd1MvcHrP9xCw',
-                'quantity': 1,
-            }],
+            line_items=cart_items,
+           
             mode='payment',
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/cancel/'
     )
+    
         context = {
             'session_id': session.id,
             'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY
         }
+         
         return render(self.request, "checkout.html", context)
 
-    def post(self, *args, **kwargs):
-        form = CheckoutForm(self.request.POST or None)
+
+
+    def post(self,request, *args, **kwargs):
+        form = CheckoutForm(self.request.POST)
         try:
-            # order = Post.objects.get(user=self.request.user, ordered=False)
+            order = Post.objects.get_queryset()
             if form.is_valid():
                 street_address = form.cleaned_data.get('address')
                 apartment_address = form.cleaned_data.get('address2')
@@ -138,11 +148,12 @@ class CheckoutView(View):
                 # order.billing_address = billing_address
                 # order.save()
 
-
-                return redirect('checkout')
+                
+                return redirect(self.request, 'checkout')
         except ObjectDoesNotExist:
-            messages.error(self.request, 'you do not have an active order')
-            return redirect("summary")
+                
+                messages.error(self.request, 'you do not have an active order')
+                return redirect("summary")
 
 class PaymentView(View):
     def get(self, *args,**kwargs):

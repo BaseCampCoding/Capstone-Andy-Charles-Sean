@@ -1,8 +1,7 @@
 from django.urls import path
 from .views import (
-    FavoritePostList, FavoriteView, HomeListView, PantsListView, PostCreateView, PostDetailView, ShoesListView, SuccessView, TopsListView, ReviewCreateView, CheckoutView, PaymentView,ItemListView,
-
-    CartView, FavoritePostList, FavoriteView, HomeListView,
+    FavoritePostList, FavoriteView, HomeListView, PantsListView, PostCreateView, PostDetailView, ShoesListView, SuccessView, TopsListView, ReviewCreateView, CheckoutView, PaymentView,
+    CartView, HomeListView,
     PantsListView, PostCreateView, PostDetailView, ShoesListView,
     ShoppingCartView, TopsListView, ReviewCreateView, CheckoutView,
     PaymentView, FemaleListView, MaleListView,
@@ -25,5 +24,6 @@ urlpatterns = [
     path('success/', SuccessView.as_view(),name = 'success'),
     path('male/', MaleListView.as_view(), name='male_list'),
     path('female', FemaleListView.as_view(), name='female_list'),
+    
 ]
 
