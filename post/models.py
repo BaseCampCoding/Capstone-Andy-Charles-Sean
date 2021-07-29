@@ -28,7 +28,7 @@ class Post(models.Model):
     ]
     
     image = models.ImageField(null=True, upload_to=None, height_field=None, width_field=None, max_length=100, )
-    item  = models.CharField(max_length=32)
+    item  = models.CharField(max_length=64)
     categories = models.CharField(max_length=5, choices=CATEGORIES, default="Tops")
     gender = models.CharField(max_length=6, choices=MORF, default="Male")
     seller = models.ForeignKey(

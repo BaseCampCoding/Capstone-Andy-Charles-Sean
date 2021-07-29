@@ -1,12 +1,9 @@
 from django.urls import path
 from .views import (
-    FavoritePostList, FavoriteView, HomeListView, PantsListView, PostCreateView, PostDetailView, ShoesListView, SuccessView, TopsListView, ReviewCreateView, PaymentView,
-    CartView, HomeListView,
-    PantsListView, PostCreateView, PostDetailView, ShoesListView,
-    CartView, FavoritePostList, FavoriteView, HomeListView,
-    PantsListView, PostCreateView, PostDetailView, SearchListView, ShoesListView,
-    ShoppingCartView, TopsListView, ReviewCreateView,
-    PaymentView, FemaleListView, MaleListView,  SuccessView, FilterListView,checkout
+    CartView, FavoritePostList, FavoriteView, HomeListView, PantsListView, 
+    PostCreateView, PostDetailView, SearchListView, ShoesListView,
+    ShoppingCartView, TopsListView, ReviewCreateView, PaymentView, 
+    FemaleListView, MaleListView,  SuccessView, FilterListView, checkout
     )
 
 

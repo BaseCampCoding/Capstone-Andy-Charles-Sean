@@ -82,20 +82,22 @@ label {
 }
 
 .remove-product {
+  position: relative;
+  top: 16px;
   border: 0;
   padding: 4px 8px;
   background-color: #c66;
   color: #fff;
   font-family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 3px;
   margin-left: -25px !important;
-  margin-top: 10px;
   text-decoration: none;
 }
 
 .remove-product:hover {
   background-color: #a44;
+  color: white;
 }
 
 .totals label {
@@ -195,7 +197,7 @@ h3 {
           <input type="number" value="1" min="1">
         </div> -->
         <div class="product-removal">
-          <a class="remove-product" href="{% url 'favorite_post' post.pk %}">
+          <a class="remove-product" href="{% url 'shopping' post.pk %}">
             Remove
           </a>
         </div>
@@ -213,11 +215,11 @@ h3 {
     <div class="totals">
       <div class="totals-item">
         <label>Subtotal</label>
-        <div class="totals-value" id="cart-subtotal">90.57</div>
+        <div class="totals-value" id="cart-subtotal">{{ total_cost }}</div>
       </div>
       <div class="totals-item totals-item-total">
         <label>Grand Total</label>
-        <div class="totals-value" id="cart-total">90.57</div>
+        <div class="totals-value" id="cart-total">{{ total_cost }}</div>
       </div>
     </div>
       <a href="{% url 'checkout' %}" class="checkout">Checkout</a>
