@@ -99,12 +99,20 @@ def checkout(request):
                     'quantity': 1,
                 }
             cart_items.append(data)
+        total = 0
+        for i in shopping_cart_list:
+            total += i.price
+
             
 
         stripe.api_key = settings.STRIPE_SECRET_KEY
         YOUR_DOMAIN = "http://127.0.0.1:8000"
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
+            shipping_rates=['shr_1JIwhDHSf7eLd1MvgAzNqkPr'],
+            shipping_address_collection={
+            'allowed_countries': ['US'],
+            },
             
             line_items=cart_items,
 
@@ -127,10 +135,12 @@ def checkout(request):
 
         context = {
             'session_id': session.id,
-            'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY
+            'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
+            "total_cost" : total,
+            "shopping_cart_list" : shopping_cart_list,
         }
-         
-        return render(request, "checkout.html", context)
+
+        return render(request, "shopping_cart.html", context)
 
 
 class PaymentView(View):
@@ -170,18 +180,6 @@ def CartView(request, pk):
         post.cart.add(request.user)
     return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
 
-def ShoppingCartView(request, **kwargs):
-    user = request.user
-    shopping_cart_list = user.cart.all()
-    total = 0
-    for i in shopping_cart_list:
-        total += i.price
-
-    context = {
-        "total_cost" : total,
-        "shopping_cart_list" : shopping_cart_list,
-    }
-    return render(request, "shopping_cart.html", context)
 
 # Testing remove items from cart
 def remove(request):
