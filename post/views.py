@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db.models.query import EmptyQuerySet
+from django.core.exceptions import ObjectDoesNotExist
+from django.http.request import HttpRequest
 from django.views.generic import ListView, CreateView
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render , redirect, get_object_or_404
@@ -14,6 +16,7 @@ from .forms import ReviewForm
 from django.db.models import Q
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -85,6 +88,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def checkout(request):
         user = request.user
         shopping_cart_list = user.cart.all()
+        total = 0
         cart_items = [] 
         for i in shopping_cart_list:
             data = {
@@ -102,7 +106,10 @@ def checkout(request):
         shipping = 5
         for i in shopping_cart_list:
             total += i.price
-
+            cart_items.append(data)
+        if cart_items == []:
+            return render(request,"shopping_cart.html")
+        
             
 
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -129,7 +136,7 @@ def checkout(request):
             "total" : total,
             "total_cost" : total + shipping,
             "shopping_cart_list" : shopping_cart_list,
-        }
+        }   
 
         return render(request, "shopping_cart.html", context)
 
