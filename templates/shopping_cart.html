@@ -1,5 +1,5 @@
 {% extends 'index.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <style>
 .product-image { float: left; width: 25%; margin-right: 20px; color:rgb(255, 255, 255)}
@@ -172,6 +172,13 @@ h3 {
 <body>
 <div class="wrapper">
   <div class="one">
+     <!-- <form>
+                  {% csrf_token %}
+                  {{ form|crispy }}
+                  <button class='btn btn-primary' type='submit'>Checkout</button>
+              </form> -->
+    <form method="POST" class="card-body">
+      {% csrf_token %}
     <h1>Shopping Cart</h1>
     <div class="shopping-cart">
       <h3>{{ shopping_cart_list.count }} item</h3>
@@ -222,12 +229,25 @@ h3 {
         <div class="totals-value" id="cart-total">{{ total_cost }}</div>
       </div>
     </div>
-      <a href="{% url 'checkout' %}" class="checkout">Checkout</a>
+    <button class="btn btn-primary btn-lg btn-block" type="submit" id="buy_now_btn">Continue to payment</button>
+    <script src="https://js.stripe.com/v3/"></script>
+
   </div>
 </div>
 </body>
 
 <script>
+
+var stripe =  Stripe('{{ stripe_public_key }}');
+const buy_now_button = document.querySelector('#buy_now_btn')
+buy_now_button.addEventListener('click', event => {
+  stripe.redirectToCheckout({
+  sessionId: '{{ session_id }}'
+}).then(function(result){
+
+  });
+
+})
 const fadeTime = 300;
 
 /* Assign actions */
@@ -244,5 +264,6 @@ function removeItem(removeButton) {
   });
 }
 </script>
+</form>
 
 {% endblock content %}

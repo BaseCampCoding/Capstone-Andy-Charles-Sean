@@ -1,8 +1,8 @@
 from django.urls import path
 from .views import (
     CartView, FavoritePostList, FavoriteView, HomeListView, PantsListView, 
-    PostCreateView, PostDetailView, SearchListView, ShoesListView,
-    ShoppingCartView, TopsListView, ReviewCreateView, PaymentView, 
+    PostCreateView, PostDetailView, SearchListView, ShoesListView
+    ,TopsListView, ReviewCreateView, PaymentView, 
     FemaleListView, MaleListView,  SuccessView, FilterListView, checkout
     )
 
@@ -15,8 +15,7 @@ urlpatterns = [
     path('shoes/', ShoesListView.as_view(), name='shoes_list'),
     path('post/<int:pk>/', PostDetailView.as_view(), name='post_detail'),
     path('shopping/<int:pk>/', CartView, name='shopping'),
-    path('shopping_cart/', ShoppingCartView, name='shopping_cart'),
-    path('checkout/', checkout, name='checkout'),
+    path('shopping_cart/', checkout, name='shopping_cart'),
     path('payment/', PaymentView.as_view(), name='payment'),
     path('favorite/<int:pk>/', FavoriteView, name="favorite_post"),
     path('favorite_post/', FavoritePostList, name="post_favorite_list"),
