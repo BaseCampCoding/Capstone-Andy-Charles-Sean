@@ -25,6 +25,5 @@ urlpatterns = [
     path('female/', FemaleListView.as_view(), name='female_list'),
     path('search/', SearchListView.as_view(), name='search'),
     path('<gender>/<category>/', FilterListView.as_view(), name='filter'),
- 
 ]
 

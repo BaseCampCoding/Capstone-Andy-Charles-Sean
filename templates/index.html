@@ -24,7 +24,6 @@
   <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
     <div class="navbar-nav">
       <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
-      <a class="nav-link" href="{% url 'post_new' %}">Sell</a>
     </div>
     <ul class="navbar-nav" id="dropdown">
       <li class="nav-item dropdown">
@@ -60,6 +59,7 @@
       </a>
       <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
         <li><a class="dropdown-item" href="{% url 'user_account' user.pk %}"><i class="fas fa-user-circle"></i>&nbsp; Account</a></li>
+        <li><a class="dropdown-item" href="{%url 'contact_email' %}"><i class="far fa-envelope"></i>&nbsp; Contact Us</a></li>
         <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp; Log Out</a></li>
       </ul>
     </li>

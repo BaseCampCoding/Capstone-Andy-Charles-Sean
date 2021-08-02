@@ -8,13 +8,12 @@ from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
-from django.contrib import messages
 import stripe
 from django.views import View
 from django.urls.base import reverse, reverse_lazy
-from .forms import CheckoutForm, ReviewForm
-from django.db.models import Q, QuerySet
-from django.core.mail import EmailMessage
+from .forms import ReviewForm
+from django.db.models import Q
+from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 
@@ -24,15 +23,6 @@ from django.http import HttpResponse
 class HomeListView(ListView):
     model = Post
     template_name = 'index.html'
-
-    def ShoppingCartView(request, **kwargs):
-        user = request.user
-        shopping_cart_list = user.cart.all()
-
-        context = {
-            "shopping_cart_list" : shopping_cart_list,
-        }
-        return render(request, "shopping_cart.html", context)
 
 class PostCreateView(CreateView):
     model = Post
@@ -190,6 +180,15 @@ def remove(request):
     shopping_cart_list = request.user.cart.all()
     shopping_cart_list.remove(product)
     return redirect('shopping_cart')
+
+def remove(request):
+    cart = request.user.cart.all()
+    deleted_items = []
+    for item in cart:
+        deleted_items.remove(item)
+    deleted_items.clear()
+    return deleted_items
+#---------------------
 
 class ReviewCreateView(CreateView):
     model = Review

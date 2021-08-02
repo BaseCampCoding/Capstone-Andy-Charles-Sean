@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.core.mail import send_mail
+from django.shortcuts import render
 from accounts.models import CustomUser
 from post.models import Post
 from django.views.generic.detail import DetailView
@@ -8,7 +11,7 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 class SignUpView(CreateView):
-    form_class = UserCreationForm
+    form_class = UserCreationForm  
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
@@ -42,3 +45,13 @@ class UserAccountEdit(UpdateView):
 
     def test_func(self): 
         return self.get_object() == self.request.user
+
+def ContactUs(request):
+    if request.method == 'POST':
+        message = request.POST['message'],
+        send_mail('Contact Form',
+        message,
+        settings.EMAIL_HOST_USER,
+        ['freetrailac1@gmail.com'],
+        fail_silently=False)
+    return render(request, 'contact_email.html')
