@@ -91,6 +91,7 @@ def checkout(request):
         shopping_cart_list = user.cart.all()
         total = 0
         cart_items = [] 
+        shipping = 5
         for i in shopping_cart_list:
             data = {
                     'price_data': {
@@ -101,13 +102,11 @@ def checkout(request):
                         },
                     },
                     'quantity': 1,
-                }
-            cart_items.append(data)
-        total = 0
-        shipping = 5
-        for i in shopping_cart_list:
+                },
+
             total += i.price
             cart_items.append(data)
+        
         if cart_items == []:
             return render(request,"shopping_cart.html")
         
@@ -123,6 +122,8 @@ def checkout(request):
             },
             
             line_items=cart_items,
+            
+            
 
            
             mode='payment',
