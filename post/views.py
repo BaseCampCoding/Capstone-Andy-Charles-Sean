@@ -151,6 +151,35 @@ def checkout(request):
             "shopping_cart" : len(shopping_cart_list)
         }   
         
+        total = 0
+        shipping = 5
+        for i in shopping_cart_list:
+            total += i.price
+        if cart_items == []:
+            return render(request,"shopping_cart.html")
+
+
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        YOUR_DOMAIN = "http://127.0.0.1:8000"
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            shipping_rates=['shr_1JIwhDHSf7eLd1MvgAzNqkPr'],
+            shipping_address_collection={
+            'allowed_countries': ['US'],
+            },
+            line_items=cart_items,
+            mode='payment',
+            success_url=YOUR_DOMAIN + '/success/',
+            cancel_url=YOUR_DOMAIN + '/shopping_cart/'
+        )
+        context = {
+            'session_id': session.id,
+            'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
+            "total" : total,
+            "total_cost" : total + shipping,
+            "shopping_cart_list" : shopping_cart_list,
+            "shopping_cart" : len(shopping_cart_list)
+        }   
         return render(request, "shopping_cart.html", context)
 
 
