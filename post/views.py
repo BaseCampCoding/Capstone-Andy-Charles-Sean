@@ -15,7 +15,8 @@ from .forms import ReviewForm
 from django.db.models import Q
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
-from django.http import HttpResponse
+
+
 
 
 # Create your views here.
@@ -132,7 +133,7 @@ def checkout(request):
             "total_cost" : total,
             "shopping_cart_list" : shopping_cart_list,
         }   
-
+        
         return render(request, "shopping_cart.html", context)
 
 
