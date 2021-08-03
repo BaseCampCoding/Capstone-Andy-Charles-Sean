@@ -146,6 +146,7 @@ def checkout(request):
             "total" : total,
             "total_cost" : total + shipping,
             "shopping_cart_list" : shopping_cart_list,
+            "shopping_cart" : len(shopping_cart_list)
         }   
         
         return render(request, "shopping_cart.html", context)

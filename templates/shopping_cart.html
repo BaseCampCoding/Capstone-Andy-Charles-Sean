@@ -201,7 +201,11 @@ h3 {
   <div class="one">
     <h1>Shopping Cart</h1>
     <div class="shopping-cart">
+      {% if shopping_cart >= 1 %}
       <h3>{{ shopping_cart_list.count }} item</h3>
+      {% else %}
+      <h3>0 item</h3>
+      {% endif %}
       <div class="bar"></div>
       <div class="column-labels">
         <label class="product-image"></label>
@@ -238,6 +242,7 @@ h3 {
   </div>
   <div class="two">
     <div class="totals">
+      {% if shopping_cart >= 1 %}
       <div class="totals-item margin-top">
         <label>Subtotal</label>
         <div class="totals-value flex" id="cart-subtotal">{{ total }}</div>
@@ -251,7 +256,8 @@ h3 {
         <div class="totals-value flex" id="cart-total">{{ total_cost }}</div>
       </div>
       <button class="checkout" type="submit" id="buy_now_btn">Checkout</button>
-      <!-- <div class="totals-item">
+      {% else %}
+      <div class="totals-item">
         <label>Subtotal</label>
         <div class="totals-value" id="cart-subtotal">0.00</div>
       </div>
@@ -263,7 +269,8 @@ h3 {
         <label>Grand Total</label>
         <div class="totals-value" id="empty-cart">0.00</div>
       </div>
-      <button class="checkout-no-items" type="submit" onclick="alert('Add items into shopping cart')">Checkout</button> -->
+      <button class="checkout-no-items" type="submit" onclick="alert('Add items into shopping cart')">Checkout</button>
+      {% endif %}
     </div>
     <script src="https://js.stripe.com/v3/"></script>
 
