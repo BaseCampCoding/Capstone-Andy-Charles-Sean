@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render , redirect, get_object_or_404
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import DeleteView, UpdateView
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
 import stripe
@@ -16,6 +17,7 @@ from .forms import ReviewForm
 from django.db.models import Q
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 
@@ -77,11 +79,21 @@ def SuccessView(request):
         'Thanks for shopping at Shelf Wear',
         template,
         settings.EMAIL_HOST_USER,
-        [request.user.email, 'freetrailac1@gmail.com'],
+        [request.user.email],
     )
     email.fail_silently=False
     email.send()
-    return render(request, "success.html")
+
+    cart = request.user.cart
+    shopping_cart = []
+    for item in cart.all():
+        cart.remove(item)
+        shopping_cart.append(item)
+    context = {
+        "shopping_cart" : shopping_cart,
+        "total_items" : len(shopping_cart),
+    }
+    return render(request, "success.html", context)
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -188,13 +200,6 @@ def remove(request):
     shopping_cart_list.remove(product)
     return redirect('shopping_cart')
 
-def remove(request):
-    cart = request.user.cart.all()
-    deleted_items = []
-    for item in cart:
-        deleted_items.remove(item)
-    deleted_items.clear()
-    return deleted_items
 #---------------------
 
 class ReviewCreateView(CreateView):
@@ -238,3 +243,24 @@ class FilterListView(ListView):
         category = self.request.resolver_match.kwargs['category']
         posts = Post.objects.filter(gender=gender, categories=category)
         return posts
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    template_name = 'post_edit.html'
+    fields = ['item', 'image', 'categories', 'gender', 'price', 'description',]
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.seller == self.request.user
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.seler = self.request.user
+        return super().form_valid(form)
+    def test_func(self):
+        obj = self.get_object()
+        return obj.seller == self.request.user

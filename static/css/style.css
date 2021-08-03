@@ -49,10 +49,9 @@ img {
     border-top-left-radius: 5px;
 }
 
-#shopping-cart {
-  width: 50px !important;
-  height: 45px !important;
-  margin-right: 10px !important;
-  margin-top: 5px !important;
+.bar {
+  margin: 0 -1.2rem 1rem 0;
+  padding: .12rem 0;
+  background-color:rgb(219, 86, 24);
 }
 

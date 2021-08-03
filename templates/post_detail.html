@@ -82,6 +82,38 @@
   .add-cart:hover {
     color: white;
   }
+
+  .delete {
+    background-color: #cc1d1d;
+    border: none;
+    border-radius: 2rem;
+    color: white;
+    padding: 15px 44.5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+  .edit{
+    background-color: #3da3c2;
+    border: none;
+    border-radius: 2rem;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    text-decoration: none;
+  }
+
+  .edit-delete {
+    grid-column: 2 / 5;
+    grid-row: 3;
+    margin-left: 10px;
+  }
+
 </style>
 {% if user.is_authenticated %}
   <div class="wrapper">
@@ -109,6 +141,12 @@
         </a>
       {% endif %}
     </div>
+    {% if post.seller == user %}
+        <div class="edit-delete">
+            <a class="edit"href="{% url 'post_edit' post.pk %}">Edit</a>
+            <a class="delete" href="{% url 'post_delete' post.pk %}">Delete</a>
+        </div>
+    {% endif %}
     <div class="favorite">
       {% if favorite %}
         <a href="{% url 'favorite_post' post.pk %}">
@@ -177,7 +215,7 @@
     </div>
     <br>
     <div class="three">
-      <h3 style="text-align: center;">Related Items</h3>
+      <h2 style="text-align: center;">Related Items</h2>
       <div class="card-deck">
         {% for item in related_items %}
           <div class="card post-entry" style="width: 18rem;">
