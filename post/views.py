@@ -76,11 +76,21 @@ def SuccessView(request):
         'Thanks for shopping at Shelf Wear',
         template,
         settings.EMAIL_HOST_USER,
-        [request.user.email, 'freetrailac1@gmail.com'],
+        [request.user.email],
     )
     email.fail_silently=False
     email.send()
-    return render(request, "success.html")
+
+    cart = request.user.cart
+    shopping_cart = []
+    for item in cart.all():
+        cart.remove(item)
+        shopping_cart.append(item)
+    context = {
+        "shopping_cart" : shopping_cart,
+        "total_items" : len(shopping_cart),
+    }
+    return render(request, "success.html", context)
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -106,7 +116,6 @@ def checkout(request):
         shipping = 5
         for i in shopping_cart_list:
             total += i.price
-            cart_items.append(data)
         if cart_items == []:
             return render(request,"shopping_cart.html")
         
@@ -186,13 +195,6 @@ def remove(request):
     shopping_cart_list.remove(product)
     return redirect('shopping_cart')
 
-def remove(request):
-    cart = request.user.cart.all()
-    deleted_items = []
-    for item in cart:
-        deleted_items.remove(item)
-    deleted_items.clear()
-    return deleted_items
 #---------------------
 
 class ReviewCreateView(CreateView):
