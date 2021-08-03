@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.db.models.query import EmptyQuerySet
 from django.core.exceptions import ObjectDoesNotExist
 from django.http.request import HttpRequest
 from django.views.generic import ListView, CreateView
@@ -70,8 +71,17 @@ class ShoesListView(ListView):
     template_name = 'categories/shoes_list.html'
     context_object_name = 'all_shoes_list'
 
-class SuccessView(TemplateView):
-    template_name = 'success.html'
+def SuccessView(request):
+    template = render_to_string('email_template.html', {'name':request.user.username})
+    email = EmailMessage(
+        'Thanks for shopping at Shelf Wear',
+        template,
+        settings.EMAIL_HOST_USER,
+        [request.user.email, 'freetrailac1@gmail.com'],
+    )
+    email.fail_silently=False
+    email.send()
+    return render(request, "success.html")
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -92,6 +102,10 @@ def checkout(request):
                     },
                     'quantity': 1,
                 }
+            cart_items.append(data)
+        total = 0
+        shipping = 5
+        for i in shopping_cart_list:
             total += i.price
             cart_items.append(data)
         if cart_items == []:
@@ -114,23 +128,14 @@ def checkout(request):
             mode='payment',
             
             success_url=YOUR_DOMAIN + '/success/',
-            cancel_url=YOUR_DOMAIN + '/cancel/'
+            cancel_url=YOUR_DOMAIN + '/shopping_cart/'
         )
-
-        template = render_to_string('email_template.html', {'name':request.user.username})
-        email = EmailMessage(
-            'Thanks for shopping at Shelf Wear',
-            template,
-            settings.EMAIL_HOST_USER,
-            [request.user.email, 'freetrailac1@gmail.com'],
-        )
-        email.fail_silently=False
-        email.send()
 
         context = {
             'session_id': session.id,
             'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
-            "total_cost" : total,
+            "total" : total,
+            "total_cost" : total + shipping,
             "shopping_cart_list" : shopping_cart_list,
         }   
         
