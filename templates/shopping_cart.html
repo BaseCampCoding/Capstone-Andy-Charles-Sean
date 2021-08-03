@@ -106,18 +106,32 @@ label {
   margin: 0 0 -1rem 10px;
 }
 
+.margin-top {
+  margin-top:  10px;
+}
+
 .totals .totals-value {
   display: flex;
   justify-content: flex-end;
   margin: 0 10px 0 0;
 }
 
+#cart-total {
+  color: rgb(255, 94, 94);
+  font-size: 20px;
+}
+
+.flex {
+  position: relative;
+  bottom: 9px;
+}
+
 .checkout {
   display: flex;
   justify-content: center;
   border: 0;
-  margin: 20px 10px 15px 10px;
-  padding: 3px 10px;
+  margin: 20px 0 15px 30px;
+  padding: 3px 60px;
   background-color: #6b6;
   color: #fff;
   font-size: 23px;
@@ -128,6 +142,19 @@ label {
 .checkout:hover {
   background-color: #494;
   color: #fff;
+}
+
+.checkout-no-items {
+  display: flex;
+  justify-content: center;
+  border: 0;
+  margin: 20px 0 15px 30px;
+  padding: 3px 60px;
+  background-color: #6b6;
+  color: #fff;
+  font-size: 23px;
+  border-radius: 3px;
+  text-decoration: none;
 }
 
 .wrapper {
@@ -167,18 +194,11 @@ h3 {
   padding: .12rem 0;
   background-color:rgb(219, 86, 24);
 }
-
+  
 </style>
 <body>
 <div class="wrapper">
   <div class="one">
-     <!-- <form>
-                  {% csrf_token %}
-                  {{ form|crispy }}
-                  <button class='btn btn-primary' type='submit'>Checkout</button>
-              </form> -->
-    <form method="POST" class="card-body">
-      {% csrf_token %}
     <h1>Shopping Cart</h1>
     <div class="shopping-cart">
       <h3>{{ shopping_cart_list.count }} item</h3>
@@ -189,47 +209,62 @@ h3 {
         <label class="product-removal"></label>
         <label class="product-price"></label>
         <!-- <label class="product-quantity">Quantity</label> -->
-        <!-- <label class="product-line-price">Total</label> -->
       </div>
-      {% for post in shopping_cart_list %}
+      {% for item in shopping_cart_list %}
       <div class="product">
         <div class="product-image">
-            <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
+            <a href="{% url 'post_detail' item.pk %}"><img class="card-img-top" src="{{ item.image.url }}" ></a>
         </div>
         <div class="product-details">
-          <div class="product-title">{{ post.item }}</div>
-          <p class="product-description">{{ post.description }}</p>
+          <div class="product-title">{{ item }}</div>
+          <p class="product-description">{{ item.description }}</p>
         </div>
         <!-- <div class="product-quantity">
           <input type="number" value="1" min="1">
         </div> -->
         <div class="product-removal">
-          <a class="remove-product" href="{% url 'shopping' post.pk %}">
+          <a class="remove-product" href="{% url 'shopping' item.pk %}">
             Remove
           </a>
         </div>
-        <div class="product-price-detail">${{ post.price }}</div>
-        <!-- <div class="product-line-price">{{ post.price }}</div> -->
+        <div class="product-price-detail">${{ item.price }}</div>
       </div>
       {% empty %}
         <div>
-            <h3>Your cart is empty</h3>
+          <h3>Your cart is empty</h3>
         </div>
       {% endfor %}
     </div>
   </div>
   <div class="two">
     <div class="totals">
-      <div class="totals-item">
+      <div class="totals-item margin-top">
         <label>Subtotal</label>
-        <div class="totals-value" id="cart-subtotal">{{ total_cost }}</div>
+        <div class="totals-value flex" id="cart-subtotal">{{ total }}</div>
+      </div>
+      <div class="totals-item totals-item-total">
+        <label>Shipping</label>
+        <div class="totals-value flex" id="cart-shippping">5.00</div>
       </div>
       <div class="totals-item totals-item-total">
         <label>Grand Total</label>
-        <div class="totals-value" id="cart-total">{{ total_cost }}</div>
+        <div class="totals-value flex" id="cart-total">{{ total_cost }}</div>
       </div>
+      <button class="checkout" type="submit" id="buy_now_btn">Checkout</button>
+      <!-- <div class="totals-item">
+        <label>Subtotal</label>
+        <div class="totals-value" id="cart-subtotal">0.00</div>
+      </div>
+      <div class="totals-item totals-item-total">
+        <label>Shipping</label>
+        <div class="totals-value" id="cart-shipping">0.00</div>
+      </div>
+      <div class="totals-item totals-item-total">
+        <label>Grand Total</label>
+        <div class="totals-value" id="empty-cart">0.00</div>
+      </div>
+      <button class="checkout-no-items" type="submit" onclick="alert('Add items into shopping cart')">Checkout</button> -->
     </div>
-    <button class="btn btn-primary btn-lg btn-block" type="submit" id="buy_now_btn">Continue to payment</button>
     <script src="https://js.stripe.com/v3/"></script>
 
   </div>

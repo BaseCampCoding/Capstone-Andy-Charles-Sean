@@ -14,6 +14,9 @@
             </div>
             <div class="form-control">
                 {{ form.price }}
+                <span class="toggle">
+                    <i class="fas fa-tag"></i>
+                </span>
             </div>
             <div class="form-control">
                 {{ form.categories }}
@@ -176,6 +179,6 @@ form[3].setAttribute("min", "0");
 form[3].setAttribute("max", "10000");
 form[3].getAttribute("step");
 form[3].placeholder = "Price";
-form[3].setAttribute("style", "padding-right: 15px !important;");
+form[3].setAttribute("style", "padding-right: 16px !important;");
 </script>
 {% endblock content %}

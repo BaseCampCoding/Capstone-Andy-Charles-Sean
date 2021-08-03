@@ -1,5 +1,7 @@
 from django.conf import settings
+from django.db.models.query import EmptyQuerySet
 from django.core.exceptions import ObjectDoesNotExist
+from django.http.request import HttpRequest
 from django.views.generic import ListView, CreateView
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render , redirect, get_object_or_404
@@ -8,15 +10,16 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
-from django.contrib import messages
 import stripe
 from django.views import View
 from django.urls.base import reverse, reverse_lazy
-from .forms import CheckoutForm, ReviewForm
-from django.db.models import Q, QuerySet
-from django.core.mail import EmailMessage
+from .forms import ReviewForm
+from django.db.models import Q
+from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+
 
 
 # Create your views here.
@@ -24,15 +27,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 class HomeListView(ListView):
     model = Post
     template_name = 'index.html'
-
-    def ShoppingCartView(request, **kwargs):
-        user = request.user
-        shopping_cart_list = user.cart.all()
-
-        context = {
-            "shopping_cart_list" : shopping_cart_list,
-        }
-        return render(request, "shopping_cart.html", context)
 
 class PostCreateView(CreateView):
     model = Post
@@ -79,8 +73,27 @@ class ShoesListView(ListView):
     template_name = 'categories/shoes_list.html'
     context_object_name = 'all_shoes_list'
 
-class SuccessView(TemplateView):
-    template_name = 'success.html'
+def SuccessView(request):
+    template = render_to_string('email_template.html', {'name':request.user.username})
+    email = EmailMessage(
+        'Thanks for shopping at Shelf Wear',
+        template,
+        settings.EMAIL_HOST_USER,
+        [request.user.email],
+    )
+    email.fail_silently=False
+    email.send()
+
+    cart = request.user.cart
+    shopping_cart = []
+    for item in cart.all():
+        cart.remove(item)
+        shopping_cart.append(item)
+    context = {
+        "shopping_cart" : shopping_cart,
+        "total_items" : len(shopping_cart),
+    }
+    return render(request, "success.html", context)
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -88,6 +101,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def checkout(request):
         user = request.user
         shopping_cart_list = user.cart.all()
+        total = 0
         cart_items = [] 
         for i in shopping_cart_list:
             data = {
@@ -102,9 +116,12 @@ def checkout(request):
                 }
             cart_items.append(data)
         total = 0
+        shipping = 5
         for i in shopping_cart_list:
             total += i.price
-
+        if cart_items == []:
+            return render(request,"shopping_cart.html")
+        
             
 
         stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -122,26 +139,17 @@ def checkout(request):
             mode='payment',
             
             success_url=YOUR_DOMAIN + '/success/',
-            cancel_url=YOUR_DOMAIN + '/cancel/'
+            cancel_url=YOUR_DOMAIN + '/shopping_cart/'
         )
-
-        template = render_to_string('email_template.html', {'name':request.user.username})
-        email = EmailMessage(
-            'Thanks for shopping at Shelf Wear',
-            template,
-            settings.EMAIL_HOST_USER,
-            [request.user.email, 'freetrailac1@gmail.com'],
-        )
-        email.fail_silently=False
-        email.send()
 
         context = {
             'session_id': session.id,
             'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
-            "total_cost" : total,
+            "total" : total,
+            "total_cost" : total + shipping,
             "shopping_cart_list" : shopping_cart_list,
-        }
-
+        }   
+        
         return render(request, "shopping_cart.html", context)
 
 
@@ -189,6 +197,8 @@ def remove(request):
     shopping_cart_list = request.user.cart.all()
     shopping_cart_list.remove(product)
     return redirect('shopping_cart')
+
+#---------------------
 
 class ReviewCreateView(CreateView):
     model = Review

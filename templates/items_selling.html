@@ -3,6 +3,9 @@
 {% block title %}Sell Item{% endblock title %}
 {% block content %}
 <h1>Items you're selling!</h1>
+<div class="flex">
+<a class="sell-btn" href="{% url 'post_new' %}">Sell</a>
+</div>
 <div class="card-deck">
     {% for post in item_posts %}    
       <div class="card" style="width: 18rem;">
@@ -15,4 +18,37 @@
       </div>
     {% endfor %}
   </div>
+
+<style>
+  .flex {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .sell-btn {
+    position: relative;
+    right: 5rem;
+    bottom: 2rem;
+    color: white;
+    display: inline-block;
+    background: #0f6efd;
+    border: none;
+    padding: 10px 29px;
+    font-weight: 700;
+    border-radius: 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 10pt;
+    text-decoration: none;
+  }
+
+  .sell-btn:hover {
+    color: white;
+    background: #0856ca;
+  }
+
+  h1 {
+    text-align: center;
+  }
+</style>
 {% endblock content %}
