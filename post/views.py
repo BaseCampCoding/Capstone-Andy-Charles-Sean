@@ -7,6 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render , redirect, get_object_or_404
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import DeleteView, UpdateView
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
 import stripe
@@ -16,6 +17,7 @@ from .forms import ReviewForm
 from django.db.models import Q
 from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 
@@ -97,59 +99,53 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def checkout(request):
-        user = request.user
-        shopping_cart_list = user.cart.all()
-        total = 0
-        cart_items = [] 
-        for i in shopping_cart_list:
-            data = {
-                    'price_data': {
-                        'currency': 'usd',
-                        'unit_amount': round(i.price * 100),
-                        'product_data': {
-                            'name': i
-                        },
+    user = request.user
+    shopping_cart_list = user.cart.all()
+    total = 0
+    cart_items = [] 
+    for i in shopping_cart_list:
+        data = {
+                'price_data': {
+                    'currency': 'usd',
+                    'unit_amount': round(i.price * 100),
+                    'product_data': {
+                        'name': i
                     },
-                    'quantity': 1,
-                }
-            cart_items.append(data)
-        total = 0
-        shipping = 5
-        for i in shopping_cart_list:
-            total += i.price
-        if cart_items == []:
-            return render(request,"shopping_cart.html")
+                },
+                'quantity': 1,
+            }
+        cart_items.append(data)
         
-            
+    total = 0
+    shipping = 5
+    for i in shopping_cart_list:
+        total += i.price
+    if cart_items == []:
+        return render(request,"shopping_cart.html")
 
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        YOUR_DOMAIN = "http://127.0.0.1:8000"
-        session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            shipping_rates=['shr_1JIwhDHSf7eLd1MvgAzNqkPr'],
-            shipping_address_collection={
-            'allowed_countries': ['US'],
-            },
-            
-            line_items=cart_items,
 
-           
-            mode='payment',
-            
-            success_url=YOUR_DOMAIN + '/success/',
-            cancel_url=YOUR_DOMAIN + '/shopping_cart/'
-        )
-
-        context = {
-            'session_id': session.id,
-            'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
-            "total" : total,
-            "total_cost" : total + shipping,
-            "shopping_cart_list" : shopping_cart_list,
-            "shopping_cart" : len(shopping_cart_list)
-        }   
-        
-        return render(request, "shopping_cart.html", context)
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    YOUR_DOMAIN = "http://127.0.0.1:8000"
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        shipping_rates=['shr_1JIwhDHSf7eLd1MvgAzNqkPr'],
+        shipping_address_collection={
+        'allowed_countries': ['US'],
+        },
+        line_items=cart_items,
+        mode='payment',
+        success_url=YOUR_DOMAIN + '/success/',
+        cancel_url=YOUR_DOMAIN + '/shopping_cart/'
+    )
+    context = {
+        'session_id': session.id,
+        'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
+        "total" : total,
+        "total_cost" : total + shipping,
+        "shopping_cart_list" : shopping_cart_list,
+        "shopping_cart" : len(shopping_cart_list)
+    }   
+    return render(request, "shopping_cart.html", context)
 
 
 class PaymentView(View):
@@ -240,3 +236,24 @@ class FilterListView(ListView):
         category = self.request.resolver_match.kwargs['category']
         posts = Post.objects.filter(gender=gender, categories=category)
         return posts
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    template_name = 'post_edit.html'
+    fields = ['item', 'image', 'categories', 'gender', 'price', 'description',]
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.seller == self.request.user
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.seler = self.request.user
+        return super().form_valid(form)
+    def test_func(self):
+        obj = self.get_object()
+        return obj.seller == self.request.user

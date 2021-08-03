@@ -3,7 +3,7 @@ from .views import (
     CartView, FavoritePostList, FavoriteView, HomeListView, PantsListView, 
     PostCreateView, PostDetailView, SearchListView, ShoesListView
     ,TopsListView, ReviewCreateView, PaymentView, 
-    FemaleListView, MaleListView,  SuccessView, FilterListView, checkout
+    FemaleListView, MaleListView,  SuccessView, FilterListView, checkout, PostUpdateView, PostDeleteView,
     )
 
 
@@ -25,5 +25,8 @@ urlpatterns = [
     path('female/', FemaleListView.as_view(), name='female_list'),
     path('search/', SearchListView.as_view(), name='search'),
     path('<gender>/<category>/', FilterListView.as_view(), name='filter'),
+    path('post/<int:pk>/edit/', PostUpdateView.as_view(), name='post_edit'),
+    path('post/<int:pk>/delete', PostDeleteView.as_view(), name='post_delete')
+ 
 ]
 
