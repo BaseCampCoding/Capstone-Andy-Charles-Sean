@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render , redirect, get_object_or_404
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import DeleteView, UpdateView
 from .models import Post, Address, Review
 from django.http.response import HttpResponseRedirect
 from django.contrib import messages
@@ -15,6 +16,7 @@ from .forms import CheckoutForm, ReviewForm
 from django.db.models import Q, QuerySet
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 # Create your views here.
@@ -229,3 +231,24 @@ class FilterListView(ListView):
         category = self.request.resolver_match.kwargs['category']
         posts = Post.objects.filter(gender=gender, categories=category)
         return posts
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    template_name = 'post_edit.html'
+    fields = ['item', 'image', 'categories', 'gender', 'price', 'description',]
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.seller == self.request.user
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.seler = self.request.user
+        return super().form_valid(form)
+    def test_func(self):
+        obj = self.get_object()
+        return obj.seller == self.request.user
