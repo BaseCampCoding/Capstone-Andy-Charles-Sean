@@ -7,7 +7,7 @@
 <style>
   .wrapper {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     grid-auto-rows: minmax(100px, auto);
   }
@@ -20,20 +20,20 @@
 
   .two {
     margin-left: 10px;
-    grid-column: 2 / 5;
+    grid-column: 2 / 6;
     grid-row: 1 / 3;
 
   }
 
   .three {
-    grid-column: 1 / 5;
+    grid-column: 1 / 6;
     grid-row: 4;
   }
 
   .cart {
-    grid-column: 4;
+    grid-column: 5;
     grid-row: 3;
-    margin-left: 10px;
+    margin: 0 30px;
   }
 
   .review {
@@ -45,21 +45,23 @@
   .favorite {
     display: flex;
     justify-content: flex-end;
-    grid-column: 4;
+    grid-column: 5;
     grid-row: 1;
     margin-right: 15px;
   }
 
   .remove-cart {
-    background-color: #cc1d1d;
-    border: none;
-    border-radius: 2rem;
     color: white;
-    padding: 15px 40.5px;
-    text-align: center;
-    text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    background: #cc1d1d;
+    border: none;
+    padding: 7px 15px;
+    font-weight: 700;
+    border-radius: 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 10pt;
+    text-decoration: none;
   }
 
   .remove-cart:hover {
@@ -67,20 +69,22 @@
   }
 
   .add-cart {
-    background-color: #3da3c2;
-    border: none;
-    border-radius: 2rem;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    background: #0f6efd;
+    border: none;
+    padding: 7px 15px;
+    font-weight: 700;
+    border-radius: 3px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 10pt;
     text-decoration: none;
   }
 
   .add-cart:hover {
     color: white;
+    background: #0d5dd4;
   }
 
   .delete {
