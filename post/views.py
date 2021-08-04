@@ -1,14 +1,10 @@
 from django.conf import settings
-from django.db.models.query import EmptyQuerySet
-from django.core.exceptions import ObjectDoesNotExist
-from django.http.request import HttpRequest
 from django.views.generic import ListView, CreateView
-from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render , redirect, get_object_or_404
-from django.views.generic.base import TemplateView, View
+from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView
-from .models import Post, Address, Review
+from .models import Post, Review
 from django.http.response import HttpResponseRedirect
 import stripe
 from django.views import View
@@ -118,13 +114,14 @@ def checkout(request):
             cart_items.append(data)
         total = 0
         shipping = 5
+        tax = 0.07
         for i in shopping_cart_list:
             total += i.price
+        tax_amount = float(total) * tax
+        tax_amount = "{:.2f}".format(tax_amount)
         if cart_items == []:
             return render(request,"shopping_cart.html")
         
-            
-
         stripe.api_key = settings.STRIPE_SECRET_KEY
         YOUR_DOMAIN = "http://127.0.0.1:8000"
         session = stripe.checkout.Session.create(
@@ -133,13 +130,9 @@ def checkout(request):
             shipping_address_collection={
             'allowed_countries': ['US'],
             },
-            
+          
             line_items=cart_items,
-            
-
-           
             mode='payment',
-            
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/shopping_cart/'
         )
@@ -148,48 +141,18 @@ def checkout(request):
             'session_id': session.id,
             'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
             "total" : total,
+            "tax_amount" : tax_amount,
             "total_cost" : total + shipping,
             "shopping_cart_list" : shopping_cart_list,
             "shopping_cart" : len(shopping_cart_list)
-        }   
-        
-        total = 0
-        shipping = 5
-        for i in shopping_cart_list:
-            total += i.price
-        if cart_items == []:
-            return render(request,"shopping_cart.html")
+        }
 
-
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-        YOUR_DOMAIN = "http://127.0.0.1:8000"
-        session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            shipping_rates=['shr_1JIwhDHSf7eLd1MvgAzNqkPr'],
-            shipping_address_collection={
-            'allowed_countries': ['US'],
-            },
-            line_items=cart_items,
-            mode='payment',
-            success_url=YOUR_DOMAIN + '/success/',
-            cancel_url=YOUR_DOMAIN + '/shopping_cart/'
-        )
-        context = {
-            'session_id': session.id,
-            'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
-            "total" : total,
-            "total_cost" : total + shipping,
-            "shopping_cart_list" : shopping_cart_list,
-            "shopping_cart" : len(shopping_cart_list)
-        }   
         return render(request, "shopping_cart.html", context)
 
 
 class PaymentView(View):
     def get(self, *args,**kwargs):
         return render(self.request, "payment.html")
-
-    # context_object_name = 'all_tops_list'
 
 class PantsListView(ListView):
     model = Post

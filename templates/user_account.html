@@ -13,9 +13,18 @@ body {
   padding: 0 10px;
 }
 
-/* Remove extra left and right margins, due to padding */
-.row {margin: 0 -5px;}
+.seller_column {
+  float: left;
+  width: 50%; /* 25% for 4 cards */
+  padding: 0 10px;
+}
 
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 10px;}
+
+.seller_row {
+  margin: 0 60px;
+}
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -60,7 +69,8 @@ a.custom-card:hover {
 
 </style>
 
-<div class="row">
+  {% if user.roles == "seller" %}
+  <div class="row">
     <a href="{% url 'items_selling' object.pk %}" class="custom-card column">
       <div class="account-card">
           <div class="image">
@@ -91,5 +101,29 @@ a.custom-card:hover {
           <p>View all your items</p>
       </div>
     </a>
-</div>
+  </div>
+  {% else %}
+  <div class="seller_row">
+    <a href="{% url 'user_account_edit' object.pk %}" class="custom-card seller_column">
+      <div class="account-card">
+          <div class="image">
+            <img class="account-image" src="https://i.ibb.co/W6QjxvB/shield.png" alt="Security">
+          </div>  
+          <hr>
+          <h3>Security</h3>
+          <p>Edit Username, Name and Email</p>
+      </div>
+    </a>
+    <a href="{% url 'post_favorite_list' %}" class="custom-card seller_column">
+      <div class="account-card">
+          <div class="image">
+            <img class="account-image" src="https://i.ibb.co/7CdxPW3/Image-from-i-OS-1.png" alt="Favorite">
+          </div>  
+          <hr>
+          <h3>Favorite</h3>
+          <p>View all your items</p>
+      </div>
+    </a>
+  </div>
+  {% endif%}
 {% endblock content %}
