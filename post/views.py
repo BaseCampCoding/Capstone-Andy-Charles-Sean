@@ -113,6 +113,7 @@ def checkout(request):
                         },
                     },
                     'quantity': 1,
+                    'tax_rates':['txr_1JKSJdHSf7eLd1Mviy8HlMka']
                 }
             cart_items.append(data)
         total = 0
@@ -134,6 +135,7 @@ def checkout(request):
             },
             
             line_items=cart_items,
+            
 
            
             mode='payment',
