@@ -1,12 +1,29 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div class="post-entry">
-    <h2>Delete Items</h2>
+<div class="post-entry center padding">
+    <h1>Delete Items</h1>
     <form action="" method="post">
         {% csrf_token %}
-        <p>Are you sure you want to delete "{{ post.title }}"?</p>
-        <input type="submit" value="Confirm">
+        <h4>Are you sure you want to delete "{{ post.item }}"?</h4>
+        <input class="delete" type="submit" value="Confirm">
     </form>
 </div>
+<style>
+    .padding{
+        padding-top: 150px;
+    }
+    .delete {
+    background-color: #cc1d1d;
+    border: none;
+    border-radius: 2rem;
+    color: white;
+    padding: 15px 44.5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+</style>
+
 {% endblock content %}
