@@ -226,7 +226,8 @@ class SearchListView(ListView):
         posts = Post.objects.filter(
             Q(item__icontains=q) |
             Q(description__icontains=q) |
-            Q(seller__username__icontains=q)
+            Q(seller__username__icontains=q) |
+            Q(categories__icontains=q)
         )
         return posts
     
