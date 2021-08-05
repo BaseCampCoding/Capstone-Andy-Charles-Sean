@@ -5,23 +5,20 @@
 
 {% block content %}
 <body>
-    <form action="{% url 'contact_email' %}" method="post">
-        {% csrf_token %}
-        <div class="wrapper">
-            <div class="row">
-                <h1>Contact</h1>
-                <div class="form-control">
-                    <input type="text" name="subject" placeholder="Subject">
-                </div>
-                <div class="form-control">
-                    <textarea name="message" placeholder="Message..."></textarea>
-                </div>
-                <button class="btn" type="submit">
-                    Submit
-                </button>
-            </div>
+  <form action="{% url 'contact_email' %}" method="post">
+    {% csrf_token %}
+    <div class="wrapper">
+      <div class="row">
+        <h1>Contact</h1>
+        <div class="form-control">
+            <textarea name="message" placeholder="Message..."></textarea>
         </div>
-    </form>
+        <button class="btn" type="submit">
+            Submit
+        </button>
+      </div>
+    </div>
+  </form>
 </body>
 
 <style>

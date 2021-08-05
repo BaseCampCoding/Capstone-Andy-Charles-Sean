@@ -49,9 +49,10 @@ class UserAccountEdit(UpdateView):
 def ContactUs(request):
     if request.method == 'POST':
         message = request.POST['message'],
-        send_mail('Contact Form',
+        send_mail(
+        'Contact Form',
         message,
-        settings.EMAIL_HOST_USER,
-        ['freetrailac1@gmail.com'],
+        request.user.email,
+        [settings.EMAIL_HOST_USER],
         fail_silently=False)
     return render(request, 'contact_email.html')

@@ -119,6 +119,8 @@ def checkout(request):
             total += i.price
         tax_amount = float(total) * tax
         tax_amount = "{:.2f}".format(tax_amount)
+        total_cost = float(total) + shipping + float(tax_amount)
+        total_cost = "{:.2f}".format(total_cost)
         if cart_items == []:
             return render(request,"shopping_cart.html")
         
@@ -142,7 +144,7 @@ def checkout(request):
             'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
             "total" : total,
             "tax_amount" : tax_amount,
-            "total_cost" : total + shipping,
+            "total_cost" : total_cost,
             "shopping_cart_list" : shopping_cart_list,
             "shopping_cart" : len(shopping_cart_list)
         }

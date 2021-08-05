@@ -194,7 +194,26 @@ h3 {
   padding: .12rem 0;
   background-color:rgb(219, 86, 24);
 }
-  
+
+.promo-code input {
+  width: 65%;
+  padding: 0 10px 0 10px;
+  height: 35px;
+  border: 30px;
+  outline: none;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  background-color: #c9c9c9;
+  font-size: 12px;
+  margin: 20px 5px 0 15px;
+}
+
+.promo-code .btn {
+  color:rgb(255, 255, 255);
+  background-color:rgb(219, 86, 24);
+  border-radius: 50%;
+}
+
 </style>
 <body>
 <div class="wrapper">
@@ -259,6 +278,11 @@ h3 {
         <label>Grand Total</label>
         <div class="totals-value flex" id="cart-total">{{ total_cost }}</div>
       </div>
+      <div class="promo-code">
+        <label>Discount</label>
+        <input class="code" disabled>
+        <button class="btn" disabled>Apply</button>
+      </div>
       <button class="checkout" type="submit" id="buy_now_btn">Checkout</button>
       {% else %}
       <div class="totals-item">
@@ -287,6 +311,8 @@ h3 {
 </body>
 
 <script>
+let input = document.getElementsByTagName("input")
+input[1].placeholder = "Enter Promo Code"
 
 var stripe =  Stripe('{{ stripe_public_key }}');
 const buy_now_button = document.querySelector('#buy_now_btn')
