@@ -900,25 +900,6 @@ label {
   background-color:rgb(219, 86, 24);
 }
 
-.promo-code input {
-  width: 65%;
-  padding: 0 10px 0 10px;
-  height: 35px;
-  border: 30px;
-  outline: none;
-  margin-bottom: 10px;
-  border-radius: 7px;
-  background-color: #c9c9c9;
-  font-size: 12px;
-  margin: 20px 5px 0 15px;
-}
-
-.promo-code .btn {
-  color:rgb(255, 255, 255);
-  background-color:rgb(219, 86, 24);
-  border-radius: 50%;
-}
-
 
 /* Receipt CSS */
 .receipt-product-image { float: left; width: 25%; margin-right: 20px;}
