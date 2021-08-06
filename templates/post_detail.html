@@ -19,10 +19,9 @@
   }
 
   .two {
-    margin-left: 10px;
+    margin: 10px 0 0 10px;
     grid-column: 2 / 6;
     grid-row: 1 / 3;
-
   }
 
   .three {
@@ -48,6 +47,10 @@
     grid-column: 5;
     grid-row: 1;
     margin-right: 15px;
+  }
+
+  .star {
+    margin-top: 10px;
   }
 
   .remove-cart {
@@ -126,7 +129,6 @@
     </div>
     <div class="two">
       <h2 class="float-right">{{ post.item }}</h2>
-      
       <p>${{ post.price }}</p>
       <p class="font-weight-bold">Seller: <span >{{ post.seller }}</span></p>
       <hr>
@@ -154,11 +156,11 @@
     <div class="favorite">
       {% if favorite %}
         <a href="{% url 'favorite_post' post.pk %}">
-          <i class="fas fa-2x fa-star"></i>
+          <i class="fas fa-2x fa-star star"></i>
         </a>
       {% else %}
         <a href="{% url 'favorite_post' post.pk %}">
-          <i class="far fa-2x fa-star"></i>
+          <i class="far fa-2x fa-star star"></i>
         </a>
       {% endif %}
     </div>
