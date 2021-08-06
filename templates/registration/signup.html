@@ -6,7 +6,7 @@
 <body>
     <form action="{% url 'signup' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="wrapper">
+        <div class="sign-up-wrapper">
             <div class="row">
                 <h1>Sign Up</h1>
                 <div class="form-control">
@@ -60,94 +60,6 @@
 
 body {
     background: #a5a5a5;    
-}
-
-.wrapper {
-    width: 600px;
-    height: auto;
-    padding: 25px 7px;
-    background-color: #fff;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    border-radius: 7px;
-    margin-top: 100px;
-}
-
-.wrapper .row {
-    width: 80%;
-    position: flex;
-    margin: auto;
-}
-
-.wrapper h1 {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #000;
-    padding-bottom: 10px;
-}
-
-.form-control {
-    border-width: 0px !important;
-}
-
-#password2 {
-    padding-right: 10px !important;
-}
-
-#first_name, #last_name {
-    padding-right: 5px !important;
-}
-
-.wrapper input {
-    width: 100%;
-    padding: 0 40px 0 20px;
-    height: 50px;
-    border: none;
-    outline: none;
-    margin-bottom: 20px;
-    border-radius: 7px;
-    background-color: #f1f2f6;
-    font-size: 16px;
-}
-
-.wrapper select {
-	background-color: #fff;
-    width: 100%;
-    -moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-    padding: 0 40px 0 20px;
-    height: 50px;
-    border: none;
-    margin-bottom: 20px;
-    background-color:  #f1f2f6  ;
-    font-size: 16px;
-    box-shadow:none;
-}
-
-.wrapper .toggle {
-    position: relative;
-    cursor: pointer;
-}
-
-.wrapper .toggle i {
-    position: absolute;
-    top: 4px;
-    right: 15px;
-    color: #778ca3;
-}
-
-.wrapper .btn {
-    width: 100px;
-    padding: 10px;
-    margin: 0 0 8px 12px;
-    border-radius: 7px;
-    outline: none;
-    border: none;
-    color: #fff;
-    background: #0f6efd;
-    cursor: pointer;
 }
 </style>
 
