@@ -135,6 +135,8 @@ def checkout(request):
           
             line_items=cart_items,
             mode='payment',
+            #testing coupon system
+            allow_promotion_codes=True,
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/shopping_cart/'
         )
