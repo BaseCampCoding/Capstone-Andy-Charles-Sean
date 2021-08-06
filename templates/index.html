@@ -30,6 +30,7 @@
           Men's
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'male_list' %}">All</a></li>
           <li><a class="dropdown-item" href="/male/tops">Tops</a></li>
           <li><a class="dropdown-item" href="/male/pants">Pants</a></li>
           <li><a class="dropdown-item" href="/male/shoes">Shoes</a></li>
@@ -40,6 +41,7 @@
           Women's
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+          <li><a class="dropdown-item" href="{% url 'female_list' %}">All</a></li>
           <li><a class="dropdown-item" href="/female/tops">Tops</a></li>
           <li><a class="dropdown-item" href="/female/pants">Pants</a></li>
           <li><a class="dropdown-item" href="/female/shoes">Shoes</a></li>
@@ -77,6 +79,7 @@
               Men's
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="{% url 'male_list' %}">All</a></li>
               <li><a class="dropdown-item" href="/male/tops">Tops</a></li>
               <li><a class="dropdown-item" href="/male/pants">Pants</a></li>
               <li><a class="dropdown-item" href="/male/shoes">Shoes</a></li>
@@ -87,6 +90,7 @@
               Women's
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="{% url 'female_list' %}">All</a></li>
               <li><a class="dropdown-item" href="/female/tops">Tops</a></li>
               <li><a class="dropdown-item" href="/female/pants">Pants</a></li>
               <li><a class="dropdown-item" href="/female/shoes">Shoes</a></li>
@@ -166,7 +170,7 @@
         <div class="carousel-caption text-start">
           <h1>Header</h1>
           <p>description</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Men's</a></p>
+          <p><a class="btn btn-lg btn-primary" href="{% url 'male_list'  %}">Men's</a></p>
         </div>
       </div>
     </div>
@@ -176,7 +180,7 @@
         <div class="carousel-caption">
           <h1>Header</h1>
           <p>description</p>
-          <p><a class="btn btn-lg btn-primary" href="#">Women's</a></p>
+          <p><a class="btn btn-lg btn-primary" href="{% url 'female_list' %}">Women's</a></p>
         </div>
       </div>
     </div>
