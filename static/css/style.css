@@ -10,6 +10,10 @@ body {
   overflow-x:hidden;
 }
 
+#selling-items {
+  margin-top: -30px;
+}
+
 /* Index Header CSS */
 .heading > p { 
   font-size: 1em;
@@ -85,9 +89,9 @@ img {
 }
 
 .image img {
-    width: 100%;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+  width: 100%;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 }
 
 .center{
@@ -170,6 +174,11 @@ img {
   color: #fff;
   background: #0f6efd;
   cursor: pointer;
+}
+
+.wrapper .btn:hover {
+  color: #fff;
+  background: #0659d4;
 }
 
 .wrapper .redirect {
@@ -261,6 +270,11 @@ appearance: none;
   color: #fff;
   background: #0f6efd;
   cursor: pointer;
+}
+
+.sign-up-wrapper .btn:hover {
+  color: #fff;
+  background: #0659d4;
 }
   
 /* Selling Item List CSS */
@@ -383,27 +397,41 @@ appearance: none;
 
 .delete {
   background-color: #cc1d1d;
-  border: none;
-  border-radius: 2rem;
   color: white;
-  padding: 15px 44.5px;
-  text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  border: none;
+  padding: 7px 15px;
+  font-weight: 700;
+  border-radius: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 10pt;
+  text-decoration: none;
 }
 
-.edit{
-  background-color: #3da3c2;
-  border: none;
-  border-radius: 2rem;
+.delete:hover {
+  background-color: #b61b1b;
   color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
+}
+
+.edit {
+  color: white;
   display: inline-block;
-  font-size: 16px;
+  background-color: #0f6efd;
+  border: none;
+  padding: 7px 23px;
+  font-weight: 700;
+  border-radius: 3px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 10pt;
   text-decoration: none;
+  margin-left: 30px;
+}
+
+.edit:hover {
+  color: white;
+  background-color: #115fd4;
 }
 
 .edit-delete {
@@ -530,6 +558,11 @@ label {
   cursor: pointer;
 }
 
+.item-edit-wrapper .btn:hover {
+  color: #fff;
+  background: #0659d4;
+}
+
 /* Post New Item CSS */
 .post-item-wrapper {
   width: 600px;
@@ -635,6 +668,11 @@ appearance: none;
   color: #fff;
   background: #0f6efd;
   cursor: pointer;
+}
+
+.post-item-wrapper .btn:hover {
+  color: #fff;
+  background: #0659d4;
 }
 
 /* Review Item Post CSS */
@@ -755,11 +793,11 @@ label {
   border-bottom: .5px solid grey;
   margin-right: -20px !important;
   background-color: rgb(243, 243, 243);
-  box-shadow: 10px 5px 5px rgb(112, 112, 112);
+  box-shadow: 10px 5px 5px rgb(155, 155, 155);
 }
 
 .product:hover {
-  box-shadow: 10px 5px 5px rgb(71, 71, 71);
+  box-shadow: 10px 5px 5px rgb(126, 126, 126);
 }
 
 .product-title {
@@ -793,7 +831,6 @@ label {
   padding: 4px 8px;
   background-color: #c66;
   color: #fff;
-  font-family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium';
   font-size: 13px;
   border-radius: 3px;
   margin-left: -25px !important;
@@ -803,6 +840,10 @@ label {
 .remove-product:hover {
   background-color: #a44;
   color: white;
+}
+
+.totals {
+  margin: 5px;
 }
 
 .totals label {
@@ -951,16 +992,16 @@ label {
   border-bottom: .5px solid grey;
   margin-right: -20px !important;
   background-color: rgb(243, 243, 243);
-  box-shadow: 10px 5px 5px rgb(112, 112, 112);
+  box-shadow: 10px 5px 5px rgb(155, 155, 155);
 }
 
 .receipt-product:hover {
-  box-shadow: 10px 5px 5px rgb(71, 71, 71);
+  box-shadow: 10px 5px 5px rgb(126, 126, 126);
 }
 
 .receipt-product-title {
   font-size: 25px;
-  text-align: center;
+  text-align: left;
 }
 
 .receipt-product .receipt-product-image {
@@ -982,25 +1023,29 @@ label {
 
 }
 
-.totals label {
-  display: flex;
-  justify-content: flex-start;
-  margin: 0 0 -1rem 10px;
+.total-bar {
+  padding: .10rem 0;
+  background-color:rgb(219, 86, 24);
 }
 
-.margin-top {
-  margin-top:  10px;
+.receipt-flex {
+  margin-right: 40px;
 }
 
-.totals .totals-value {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0 10px 0 0;
+.calculating-total {
+  margin: 20px 10px 0 30px;
+  grid-column: 1 / 4;
+  grid-row: 1;
+  background-color: rgb(243, 243, 243);
+  box-shadow: 10px 5px 5px rgb(155, 155, 155);
 }
 
-#cart-total {
-  color: rgb(255, 94, 94);
-  font-size: 20px;
+.receipt-total-wrapper {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 5px;
+  grid-auto-rows: minmax(100px, auto);
+  margin: 0 0 15px 50px;
 }
 
 .receipt-wrapper {
@@ -1096,4 +1141,9 @@ label {
   color: #fff;
   background: #0f6efd;
   cursor: pointer;
+}
+
+.account-edit-wrapper .btn:hover {
+  color: white;
+  background: #0659d4;
 }

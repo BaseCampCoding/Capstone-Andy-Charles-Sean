@@ -11,6 +11,28 @@
     If you have any questions, please email
     <a href="mailto:shelf.wear1@gmail.com">shelf.wear1@gmail.com</a>.
   </p>
+  <div class="receipt-total-wrapper">
+    <div class="calculating-total">
+      <div class="totals">
+        <div class="totals-item">
+          <label>Subtotal</label>
+          <div class="totals-value receipt-flex" id="cart-subtotal">{{ total }}</div>
+        </div>
+        <div class="totals-item">
+          <label>Tax 7%</label>
+          <div class="totals-value receipt-flex" id="cart-shippping">{{ tax_amount }}</div>
+        </div>
+        <div class="totals-item">
+          <label>Shipping</label>
+          <div class="totals-value receipt-flex" id="cart-shippping">5.00</div>
+        </div>
+        <div class="totals-item totals-item-total">
+          <label>Grand Total</label>
+          <div class="totals-value receipt-flex">{{ total_cost }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="receipt-wrapper">
     <div class="receipt-items">
       <h2 class="receipt-title">Receipt</h2>

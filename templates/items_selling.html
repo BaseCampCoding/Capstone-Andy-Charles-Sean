@@ -16,6 +16,8 @@
         <p class="card-text"> {{ post.seller }}</p>
       </div>
     </div>
+  {% empty %}
+    <h3 id="selling-items">You have no items selling</h3>
   {% endfor %}
 </div>
 {% endblock content %}
