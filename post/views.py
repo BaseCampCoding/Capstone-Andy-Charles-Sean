@@ -125,6 +125,12 @@ def checkout(request):
             return render(request,"shopping_cart.html")
         
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.create(
+            amount= 1099,
+            currency='usd',
+            payment_method_types=['card'],
+            receipt_email='andyduarte58@gmail.com',
+)
         YOUR_DOMAIN = "http://127.0.0.1:8000"
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -140,6 +146,7 @@ def checkout(request):
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/shopping_cart/'
         )
+
 
         context = {
             'session_id': session.id,
