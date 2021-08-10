@@ -48,10 +48,16 @@
         </ul>
     </li>
     </ul>
-    <form action="{% url 'search' %}" class="d-flex">
-        <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+    {% url 'male' as male_url %}
+    {% url 'female' as female_url %}
+    {% url 'male/pants' as mpants_url %}
+    {% url 'home' as home_url %}
+    {% if request.get_full_path == home_url %}
+      <form action="{% url 'search' %}" class="d-flex">
+          <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    {% endif %}
   </div>
   <ul class="navbar-nav" id="dropdown">
     <li class="nav-item dropdown">
