@@ -70,6 +70,8 @@ class ShoesListView(ListView):
     context_object_name = 'all_shoes_list'
 
 def SuccessView(request):
+    user = request.user
+    shopping_cart_list = user.cart.all()
     template = render_to_string('email_template.html', {'name':request.user.username})
     email = EmailMessage(
         'Thanks for shopping at Shelf Wear',
@@ -80,14 +82,28 @@ def SuccessView(request):
     email.fail_silently=False
     email.send()
 
+    total = 0
+    shipping = 5
+    tax = 0.07
+    for i in shopping_cart_list:
+        total += i.price
+    tax_amount = float(total) * tax
+    tax_amount = "{:.2f}".format(tax_amount)
+    total_cost = float(total) + shipping + float(tax_amount)
+    total_cost = "{:.2f}".format(total_cost)
+
     cart = request.user.cart
     shopping_cart = []
     for item in cart.all():
         cart.remove(item)
         shopping_cart.append(item)
+
     context = {
         "shopping_cart" : shopping_cart,
         "total_items" : len(shopping_cart),
+        "total" : total,
+        "tax_amount" : tax_amount,
+        "total_cost" : total_cost,
     }
     return render(request, "success.html", context)
 
@@ -125,6 +141,12 @@ def checkout(request):
             return render(request,"shopping_cart.html")
         
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.create(
+            amount= 1099,
+            currency='usd',
+            payment_method_types=['card'],
+            receipt_email='andyduarte58@gmail.com',
+)
         YOUR_DOMAIN = "http://127.0.0.1:8000"
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -140,6 +162,7 @@ def checkout(request):
             success_url=YOUR_DOMAIN + '/success/',
             cancel_url=YOUR_DOMAIN + '/shopping_cart/'
         )
+
 
         context = {
             'session_id': session.id,

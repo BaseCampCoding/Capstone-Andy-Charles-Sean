@@ -1,29 +1,28 @@
 {% extends 'index.html' %}
 
 {% block content %}
-<div class="post-entry center padding">
-    <h1>Delete Items</h1>
+<div class="post-entry padding">
+    <h1 class="center">Delete Item</h1>
     <form action="" method="post">
         {% csrf_token %}
-        <h4>Are you sure you want to delete "{{ post.item }}"?</h4>
+        <h4 class="center">Are you sure you want to delete "{{ post.item }}"?</h4>
+        <div class="card-deck">   
+              <div class="card" style="width: 18rem;">
+                <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
+                <div class="card-body">
+                  <p class="card-text"><b>{{ post.item }}</b></p>
+                  <p class="card-text">${{ post.price }}</p>
+                  <p class="card-text"> {{ post.seller }}</p>
+                </div>
+              </div>
+          </div>
         <input class="delete" type="submit" value="Confirm">
     </form>
 </div>
 <style>
     .padding{
-        padding-top: 150px;
+        padding-top: 40px;
     }
-    .delete {
-    background-color: #cc1d1d;
-    border: none;
-    border-radius: 2rem;
-    color: white;
-    padding: 15px 44.5px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
 </style>
 
 {% endblock content %}

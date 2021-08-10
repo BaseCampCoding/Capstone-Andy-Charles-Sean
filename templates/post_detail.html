@@ -4,6 +4,11 @@
 {% block title %}Detail Page{% endblock title %}
 
 {% block content %}
+<style>
+  body {
+    background-color: #ffffff9f;
+  }
+</style>
 {% if user.is_authenticated %}
   <div class="item-detail-wrapper">
     <div class="one">
@@ -13,6 +18,14 @@
       <h2 class="float-right">{{ post.item }}</h2>
       <p>${{ post.price }}</p>
       <p class="font-weight-bold">Seller: <span >{{ post.seller }}</span></p>
+      <svg id="after-pay-full_svg__Layer_1" data-name="Layer 1" viewBox="0 0 35.3 6.8" xmlns="http://www.w3.org/2000/svg" height="13" width="63" class="aeo-icon aeo-icon-after-pay-full logo-image _logo-image_12q15i">
+        <path d="M34.781 1.392l-1.06-.61-1.06-.64a1.07 1.07 0 00-1.6.93v.13c0 .076.038.147.1.19l.5.28a.2.2 0 00.28-.08.189.189 0 000-.1v-.32a.21.21 0 01.2-.22h.12l1 .57 1 .56a.219.219 0 01.07.3l-.07.07-1 .56-1 .57a.21.21 0 01-.29-.07.244.244 0 010-.12v-.16a1.07 1.07 0 00-1.6-.93l-1.08.62-1.06.61a1.08 1.08 0 00-.4 1.46 1 1 0 00.4.4l1.06.61 1.08.61a1.07 1.07 0 001.6-.93v-.13a.23.23 0 00-.1-.19l-.5-.29a.2.2 0 00-.28.08.227.227 0 000 .11v.32a.21.21 0 01-.2.22.27.27 0 01-.12 0l-1-.57-1-.56a.221.221 0 01-.11-.28l.07-.07 1-.56 1-.57a.21.21 0 01.29.07.222.222 0 010 .12v.16a1.07 1.07 0 001.6.93l1.08-.62 1.06-.61c.504-.31.657-.971.34-1.47a.998.998 0 00-.32-.38zM27.801 1.572l-2.49 5.14h-1l.93-1.92-1.46-3.22h1.06l.94 2.15 1-2.15zM2.911 3.392a1 1 0 10-1 1.05 1 1 0 001-1v-.05m0 1.83v-.48a1.488 1.488 0 01-1.16.54 1.79 1.79 0 01-1.75-1.83v-.06a1.82 1.82 0 011.75-1.89 1.47 1.47 0 011.14.53v-.46h.89v3.65zM8.181 4.392c-.32 0-.4-.12-.4-.42v-1.58h.57v-.79h-.57v-.92h-.92v.89h-1.2v-.37c0-.3.12-.42.44-.42h.2v-.71h-.43c-.76 0-1.12.25-1.12 1v.49h-.51v.83h.51v2.86h.91v-2.86h1.2v1.79c0 .75.28 1.07 1 1.07h.5v-.86zM11.481 3.062a.869.869 0 00-.91-.75.89.89 0 00-.92.75zm-1.82.57a.911.911 0 00.94.85 1 1 0 00.86-.47h.94a1.79 1.79 0 01-1.82 1.27 1.8 1.8 0 01-1.92-1.67v-.22a1.89 1.89 0 013.78 0c.01.076.01.154 0 .23zM18.321 3.392a1 1 0 00-1.521-.828 1 1 0 00.044 1.731.999.999 0 001.477-.853v-.05m-2.89 3.32v-5.14h.89v.47a1.49 1.49 0 011.16-.54 1.79 1.79 0 011.76 1.82v.07a1.82 1.82 0 01-1.75 1.89 1.44 1.44 0 01-1.11-.49v1.92zM22.481 3.392a1 1 0 10-1.05 1.05h.05a1 1 0 001-1v-.05m0 1.83v-.48c-.28.346-.704.545-1.15.54a1.79 1.79 0 01-1.76-1.82v-.07a1.82 1.82 0 011.75-1.89c.438-.003.853.192 1.13.53v-.46h.9v3.65zM13.811 1.932a.91.91 0 01.79-.43.886.886 0 01.39.08v.94a1.153 1.153 0 00-.65-.17.64.64 0 00-.5.71v2.16h-.93v-3.65h.9z">
+        </path>
+      </svg>
+      <span style="font-size: 12px; color: grey;">Coming Soon</span>
+      <a class="link _link_12q15i" href="#" aria-label="Afterpay Information - Opens a dialog" style="text-decoration: none;">
+        ⓘ
+      </a>
       <hr>
       <ul>
         <li class="card-text">{{ post.description }}</li>
@@ -31,7 +44,7 @@
     </div>
     {% if post.seller == user %}
         <div class="edit-delete">
-            <a class="edit"href="{% url 'post_edit' post.pk %}">Edit</a>
+            <a class="edit" href="{% url 'post_edit' post.pk %}">Edit</a>
             <a class="delete" href="{% url 'post_delete' post.pk %}">Delete</a>
         </div>
     {% endif %}

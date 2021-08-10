@@ -48,39 +48,39 @@
   <div class="calculating-section">
     <div class="totals">
       {% if shopping_cart >= 1 %}
-      <div class="totals-item margin-top">
-        <label>Subtotal</label>
-        <div class="totals-value flex" id="cart-subtotal">{{ total }}</div>
-      </div>
-      <div class="totals-item totals-item-total">
-        <label>Shipping</label>
-        <div class="totals-value flex" id="cart-shippping">5.00</div>
-      </div>
-      <div class="totals-item totals-item-total">
-        <label>Tax 7%</label>
-        <div class="totals-value flex" id="cart-shippping">{{ tax_amount }}</div>
-      </div>
-      <div class="totals-item totals-item-total">
-        <label>Grand Total</label>
-        <div class="totals-value flex" id="cart-total">{{ total_cost }}</div>
-      </div>
+        <div class="totals-item">
+          <label>Subtotal</label>
+          <div class="totals-value receipt-flex" id="cart-subtotal">{{ total }}</div>
+        </div>
+        <div class="totals-item">
+          <label>Tax 7%</label>
+          <div class="totals-value receipt-flex" id="cart-shippping">{{ tax_amount }}</div>
+        </div>
+        <div class="totals-item">
+          <label>Shipping</label>
+          <div class="totals-value receipt-flex" id="cart-shippping">5.00</div>
+        </div>
+        <div class="totals-item totals-item-total">
+          <label>Grand Total</label>
+          <div class="totals-value receipt-flex" id="cart-total">{{ total_cost }}</div>
+        </div>
       <button class="checkout" id="buy_now_btn">Checkout</button>
       {% else %}
       <div class="totals-item">
         <label>Subtotal</label>
-        <div class="totals-value" id="cart-subtotal">0.00</div>
+        <div class="totals-value receipt-flex" id="cart-subtotal">0.00</div>
       </div>
-      <div class="totals-item totals-item-total">
-        <label>Shipping</label>
-        <div class="totals-value" id="cart-shipping">0.00</div>
-      </div>
-      <div class="totals-item totals-item-total">
+      <div class="totals-item">
         <label>Tax 7%</label>
-        <div class="totals-value" id="cart-shipping">0.00</div>
+        <div class="totals-value receipt-flex" id="cart-shippping">0.00</div>
+      </div>
+      <div class="totals-item">
+        <label>Shipping</label>
+        <div class="totals-value receipt-flex" id="cart-shippping">0.00</div>
       </div>
       <div class="totals-item totals-item-total">
         <label>Grand Total</label>
-        <div class="totals-value" id="empty-cart">0.00</div>
+        <div class="totals-value receipt-flex">0.00</div>
       </div>
       <button class="checkout-no-items" onclick="alert('Add items into shopping cart')">Checkout</button>
       {% endif %}
@@ -118,6 +118,5 @@ function removeItem(removeButton) {
   });
 }
 </script>
-</form>
 
 {% endblock content %}
