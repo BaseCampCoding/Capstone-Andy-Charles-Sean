@@ -48,9 +48,7 @@
         </ul>
     </li>
     </ul>
-    {% url 'male' as male_url %}
-    {% url 'female' as female_url %}
-    {% url 'male/pants' as mpants_url %}
+    
     {% url 'home' as home_url %}
     {% if request.get_full_path == home_url %}
       <form action="{% url 'search' %}" class="d-flex">
