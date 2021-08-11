@@ -53,9 +53,9 @@
     {% url 'male/pants' as mpants_url %}
     {% url 'home' as home_url %}
     {% if request.get_full_path == home_url %}
+    <i class="fa fa-search"></i>
       <form action="{% url 'search' %}" class="d-flex">
-          <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search" style="margin-left: 680px;">
       </form>
     {% endif %}
   </div>
@@ -136,7 +136,7 @@
       <div class="container">
         <div class="carousel-caption text-start">
           <h1 style="color: rgb(255, 255, 255)">Shop Men</h1>
-          <h4>Wear clothes that describes you!</h4>
+          <h4>Wear clothes that describe you!</h4>
           <p><a class="btn btn-lg btn-primary" href="{% url 'male_list'  %}">Men's</a></p>
         </div>
       </div>
@@ -157,7 +157,7 @@
       <div class="container">
         <div class="carousel-caption text-end">
           <h1>Shop Everyone</h1>
-          <h4>Give clothes to family members</h4>
+          <h4>Clohtes for the entire family</h4>
           <p><a class="btn btn-lg btn-primary" href="#">Everyone</a></p>
         </div>
       </div>
