@@ -52,8 +52,8 @@
     {% url 'home' as home_url %}
     {% if request.get_full_path == home_url %}
     <i class="fa fa-search"></i>
-      <form action="{% url 'search' %}" class="d-flex">
-        <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search" style="margin-left: 665px;">
+      <form action="{% url 'search' %}" class="d-flex search-bar">
+        <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search" style="margin-left: 160px; padding: 7px 180px; text-align: center;">
       </form>
     {% endif %}
   </div>
@@ -64,7 +64,6 @@
       </a>
       <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
         <li><a class="dropdown-item" href="{% url 'user_account' user.pk %}"><i class="fas fa-user-circle"></i>&nbsp; Account</a></li>
-        <li><a class="dropdown-item" href="{%url 'contact_email' %}"><i class="far fa-envelope"></i>&nbsp; Contact Us</a></li>
         <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i>&nbsp; Log Out</a></li>
       </ul>
     </li>
@@ -101,9 +100,8 @@
             </ul>
           </li>
         </ul>
-        <form action="{% url 'search' %}" class="d-flex">
-          <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form action="{% url 'search' %}" class="d-flex search-bar">
+          <input name="q" class="form-control" type="search" placeholder="Search" aria-label="Search" style="margin-left: 155px; padding: 7px 180px; text-align: center;">
         </form>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
