@@ -11,7 +11,7 @@
     <div class="card" style="width: 18rem;">
       <a href="{% url 'post_detail' post.pk %}"><img class="card-img-top" src="{{ post.image.url }}" ></a>
       <div class="card-body">
-        <h4 class="card-text"><b>{{ post.item }}</b></h4>
+        <p class="card-text"><b>{{ post.item }}</b></p>
         <p class="card-text">${{ post.price }}</p>
         <p class="card-text"> {{ post.seller }}</p>
       </div>

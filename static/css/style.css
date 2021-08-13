@@ -14,6 +14,15 @@ body {
   margin-top: -30px;
 }
 
+.search-bar input[type="search"]{-webkit-appearance: none;}
+
+.search-bar input[type="search"]::-webkit-search-decoration,
+.search-bar input[type="search"]::-webkit-search-cancel-button,
+.search-bar input[type="search"]::-webkit-search-results-button,
+.search-bar input[type="search"]::-webkit-search-results-decoration { 
+  display: none; 
+}
+
 /* Index Header CSS */
 .heading > p { 
   font-size: 1em;
